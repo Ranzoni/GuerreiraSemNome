@@ -182,8 +182,9 @@ GameObject:
   - component: {fileID: 1645636161672396147}
   - component: {fileID: 6541529114590995774}
   - component: {fileID: 4639974096422153053}
-  - component: {fileID: 2544734103105576974}
   - component: {fileID: 3386633925874529116}
+  - component: {fileID: 7826115646049837993}
+  - component: {fileID: 2544734103105576974}
   m_Layer: 6
   m_Name: Bandit
   m_TagString: Untagged
@@ -286,6 +287,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925351121ed587f4ca9cb6435fe9f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3386633925874529116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017898334302565471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c84e6caae8fae64da51a3097ecd90cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7826115646049837993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017898334302565471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc93358649b3c54c858111da9bb24e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &2544734103105576974
 Animator:
   serializedVersion: 5
@@ -307,18 +332,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3386633925874529116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9017898334302565471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c84e6caae8fae64da51a3097ecd90cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &201505017540250046
 PrefabInstance:
   m_ObjectHideFlags: 0
