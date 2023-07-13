@@ -40,10 +40,12 @@ public class PlayerMove : MonoBehaviour
     {
         if (horizontalMove < 0 && !isFlipped || horizontalMove > 0 && isFlipped)
         {
+            playerAnimation.gameObject.SetActive(false);
             isFlipped = !isFlipped;
             var localScale = transform.localScale;
             localScale.x *= -1;
             transform.localScale = localScale;
+            playerAnimation.gameObject.SetActive(true);
         }
     }
 

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048704596061933964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19, y: 0.4, z: 0}
+  m_LocalPosition: {x: -0.169, y: 0.4, z: 0}
   m_LocalScale: {x: 0.57574, y: 0.57574, z: 0.57574}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8113208, g: 0.14159843, b: 0.14159843, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.754717, g: 0.23139909, b: 0.23139909, a: 1}
+  m_Color: {r: 0.9245283, g: 0.8666353, b: 0.18752226, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -179,12 +179,12 @@ GameObject:
   - component: {fileID: 9017898334302565470}
   - component: {fileID: 7567676404567355545}
   - component: {fileID: 7548053441240982922}
-  - component: {fileID: 1649716359331668207}
-  - component: {fileID: 4875870032084560489}
-  - component: {fileID: 587217418050061116}
+  - component: {fileID: 1645636161672396147}
+  - component: {fileID: 6541529114590995774}
+  - component: {fileID: 4639974096422153053}
   - component: {fileID: 2544734103105576974}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Bandit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -245,7 +245,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1649716359331668207
+--- !u!114 &1645636161672396147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,12 +254,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9017898334302565471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b888bdab9dea49e4bac2db211ff69eb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dc45eae23e49a84187339e77715982f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 4
-  jumpHeight: 5
---- !u!114 &4875870032084560489
+  velocity: 2
+--- !u!114 &6541529114590995774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,10 +267,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 9017898334302565471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d0969ad1fb0c3145bafed9a1be2ef02, type: 3}
+  m_Script: {fileID: 11500000, guid: 09e5a01dd6dbca5469dbfd673789d821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &587217418050061116
+  target: {fileID: 0}
+  rangeFollow: 10
+  minimumDistance: 2
+--- !u!114 &4639974096422153053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,10 +282,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9017898334302565471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdeecd5b48930604bb1695351ce681fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 925351121ed587f4ca9cb6435fe9f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 2852504819609845289}
 --- !u!95 &2544734103105576974
 Animator:
   serializedVersion: 5
@@ -294,7 +295,7 @@ Animator:
   m_GameObject: {fileID: 9017898334302565471}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 33fa39d8d8c6a8f4b8d2769149669031, type: 2}
+  m_Controller: {fileID: 9100000, guid: b9973b1da70322145b5ba072d7c70dda, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -366,11 +367,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e00bc05b80e12240a31ace70564d817, type: 3}
---- !u!1 &2852504819609845289 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2692521164397164439, guid: 7e00bc05b80e12240a31ace70564d817, type: 3}
-  m_PrefabInstance: {fileID: 201505017540250046}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8817844043885894132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8688751887676002378, guid: 7e00bc05b80e12240a31ace70564d817, type: 3}
