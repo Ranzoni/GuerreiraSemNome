@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerAnimation))]
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] float velocity = 2f;
@@ -11,12 +11,12 @@ public class PlayerMove : MonoBehaviour
     bool isFlipped;
     bool jumpTriggered;
     bool isJumping;
-    Animator animator;
+    PlayerAnimation playerAnimation;
 
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     void Update()
@@ -55,15 +55,10 @@ public class PlayerMove : MonoBehaviour
 
     void Run()
     {
-        RunAnimation();
+        playerAnimation.SetRun(horizontalMove != 0);
 
         var newPosition = new Vector2(horizontalMove * velocity, rb2D.velocity.y);
         rb2D.velocity = newPosition;
-    }
-
-    void RunAnimation()
-    {
-        animator.SetBool("move", horizontalMove != 0);
     }
 
     void Jump()
@@ -71,6 +66,7 @@ public class PlayerMove : MonoBehaviour
         if (!jumpTriggered || isJumping)
             return;
 
+        playerAnimation.TriggerJump();
         var newPosition = new Vector2(rb2D.velocity.x, jumpHeight);
         rb2D.velocity = newPosition;
         isJumping = true;
