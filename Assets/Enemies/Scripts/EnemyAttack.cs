@@ -1,23 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyAnimation))]
 public class EnemyAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
+    EnemyAnimation enemyAnimation;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        enemyAnimation = GetComponent<EnemyAnimation>();
     }
 
     public void Attack()
     {
-        Debug.Log("Enemy is attacking!");
+        enemyAnimation.TriggerAttack();
     }
 }

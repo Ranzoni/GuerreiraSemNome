@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
     }
 
     void Update()

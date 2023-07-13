@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        move.StopMove();
         var targetDistance = Vector2.Distance(transform.position, target.transform.position);
 
         if (targetDistance <= rangeFollow)
@@ -25,7 +26,10 @@ public class EnemyAI : MonoBehaviour
             if (targetDistance > minimumDistance)
                 move.Move(target.transform.position);
             else
+            {
+                move.Flip(target.transform.position);
                 attack.Attack();
+            }
         }
     }
 }
