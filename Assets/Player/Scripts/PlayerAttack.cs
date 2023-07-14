@@ -1,11 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimation))]
 public class PlayerAttack : MonoBehaviour
 {
-    PlayerAnimation playerAnimation;
+    [Tooltip("Intervalo (em segundos) para acionar um novo ataque")]
+    [SerializeField] float attackDelay = 1f;
 
-    bool hasAttack;
+    PlayerAnimation playerAnimation;
+    bool attackTriggered;
 
     void Start()
     {
@@ -15,11 +18,19 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
-            Attack();
+        {
+            if (!attackTriggered)
+                StartCoroutine(Attack());
+        }
     }
 
-    void Attack()
+    IEnumerator Attack()
     {
+        attackTriggered = true;
         playerAnimation.TriggerAttack();
+
+        yield return new WaitForSeconds(attackDelay);
+
+        attackTriggered = false;
     }
 }
