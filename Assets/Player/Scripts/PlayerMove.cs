@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(PlayerAnimation))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerAnimation), typeof(PlayerAttack))]
 public class PlayerMove : MonoBehaviour
 {
+    [Tooltip("Velocidade do movimento")]
     [SerializeField] float velocity = 2f;
+    [Tooltip("Altura máxima alcançada com o pulo")]
     [SerializeField] float jumpHeight = 5f;
 
     Rigidbody2D rb2D;
@@ -12,16 +15,21 @@ public class PlayerMove : MonoBehaviour
     bool jumpTriggered;
     bool isJumping;
     PlayerAnimation playerAnimation;
+    PlayerAttack attack;
 
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
+        attack = GetComponent<PlayerAttack>();
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
     }
 
     void Update()
     {
+        if (attack.IsAttacking())
+            return;
+
         ProcessRun();
         ProcessJump();
         Flip();
@@ -29,7 +37,10 @@ public class PlayerMove : MonoBehaviour
 
     void ProcessRun()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal");
+        if (attack.IsAttacking())
+            horizontalMove = 0;
+        else
+            horizontalMove = Input.GetAxisRaw("Horizontal");
     }
 
     void ProcessJump()
@@ -41,12 +52,10 @@ public class PlayerMove : MonoBehaviour
     {
         if (horizontalMove < 0 && !isFlipped || horizontalMove > 0 && isFlipped)
         {
-            playerAnimation.gameObject.SetActive(false);
             isFlipped = !isFlipped;
             var localScale = transform.localScale;
             localScale.x *= -1;
             transform.localScale = localScale;
-            playerAnimation.gameObject.SetActive(true);
         }
     }
 
@@ -74,6 +83,16 @@ public class PlayerMove : MonoBehaviour
         rb2D.velocity = newPosition;
         isJumping = true;
         jumpTriggered = false;
+    }
+
+    public bool IsJumping()
+    {
+        return jumpTriggered || isJumping;
+    }
+
+    public void StopRun()
+    {
+        horizontalMove = 0;
     }
 
     void OnCollisionEnter2D(Collision2D other)

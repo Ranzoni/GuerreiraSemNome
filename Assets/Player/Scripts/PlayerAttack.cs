@@ -1,36 +1,43 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimation))]
+[RequireComponent(typeof(PlayerAnimation), typeof(PlayerMove))]
 public class PlayerAttack : MonoBehaviour
 {
     [Tooltip("Intervalo (em segundos) para acionar um novo ataque")]
     [SerializeField] float attackDelay = 1f;
 
     PlayerAnimation playerAnimation;
-    bool attackTriggered;
+    bool isAttacking;
+    PlayerMove move;
 
     void Start()
     {
         playerAnimation = GetComponent<PlayerAnimation>();
+        move = GetComponent<PlayerMove>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (!attackTriggered)
-                StartCoroutine(Attack());
-        }
+        if (!Input.GetButtonDown("Fire1") || isAttacking || move.IsJumping())
+            return;
+        
+        StartCoroutine(Attack());
     }
 
     IEnumerator Attack()
     {
-        attackTriggered = true;
+        isAttacking = true;
+        move.StopRun();
         playerAnimation.TriggerAttack();
 
         yield return new WaitForSeconds(attackDelay);
 
-        attackTriggered = false;
+        isAttacking = false;
+    }
+    
+    public bool IsAttacking()
+    {
+        return isAttacking;
     }
 }
