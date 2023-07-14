@@ -8,12 +8,16 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float velocity = 2f;
     [Tooltip("Altura máxima alcançada com o pulo")]
     [SerializeField] float jumpHeight = 5f;
+    [Tooltip("Tempo para acionar o impulso")]
+    [SerializeField] float delayDash = 1f;
 
     Rigidbody2D rb2D;
     float horizontalMove;
     bool isFlipped;
     bool jumpTriggered;
     bool isJumping;
+    bool isDashing;
+    Coroutine dashCoroutine;
     PlayerAnimation playerAnimation;
     PlayerAttack attack;
 
@@ -22,7 +26,6 @@ public class PlayerMove : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
         attack = GetComponent<PlayerAttack>();
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
     }
 
     void Update()
@@ -67,10 +70,31 @@ public class PlayerMove : MonoBehaviour
 
     void Run()
     {
+        ProcessDash();
+
         playerAnimation.SetRun(horizontalMove != 0);
 
         var newPosition = new Vector2(horizontalMove * velocity, rb2D.velocity.y);
         rb2D.velocity = newPosition;
+    }
+
+    void ProcessDash()
+    {
+        if (horizontalMove == 0 && dashCoroutine is not null)
+        {
+            isDashing = false;
+            StopCoroutine(dashCoroutine);
+            dashCoroutine = null;
+        }
+        else if (dashCoroutine is null)
+            dashCoroutine = StartCoroutine(TriggerDash());
+    }
+
+    IEnumerator TriggerDash()
+    {
+        yield return new WaitForSeconds(delayDash);
+
+        isDashing = true;
     }
 
     void Jump()
@@ -85,6 +109,11 @@ public class PlayerMove : MonoBehaviour
         jumpTriggered = false;
     }
 
+    public bool IsFlipped()
+    {
+        return isFlipped;
+    }
+
     public bool IsJumping()
     {
         return jumpTriggered || isJumping;
@@ -95,6 +124,11 @@ public class PlayerMove : MonoBehaviour
         horizontalMove = 0;
     }
 
+    public bool IsDashing()
+    {
+        return isDashing;
+    }
+    
     void OnCollisionEnter2D(Collision2D other)
     {
         if (!other.gameObject.CompareTag("Ground"))
