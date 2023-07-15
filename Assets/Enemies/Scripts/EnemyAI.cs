@@ -24,7 +24,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         move.StopMove();
-        if (health.IsDead())
+        if (health.IsDead() || health.IsHurting())
             return;
 
         var targetCenterPosition = GetCenterPosition(target.transform);

@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925351121ed587f4ca9cb6435fe9f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
 --- !u!114 &3386633925874529116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 8
+  delayHurt: 0.8
 --- !u!95 &2544734103105576974
 Animator:
   serializedVersion: 5

@@ -19,4 +19,14 @@ public class EnemyAnimation : MonoBehaviour
     {
         animator.SetTrigger("attack");
     }
+
+    public void TriggerHurt()
+    {
+        animator.SetTrigger("hurt");
+    }
+
+    public void TriggerDeath()
+    {
+        animator.SetTrigger("death");
+    }
 }
