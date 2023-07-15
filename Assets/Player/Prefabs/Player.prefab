@@ -118,7 +118,7 @@ MonoBehaviour:
   attackDelay: 1
   dashAttackDelay: 0.5
   dashSpeed: 4
-  sword: {fileID: 4355789932094024771}
+  weapon: {fileID: 4355789932094024771}
 --- !u!95 &2544734103105576974
 Animator:
   serializedVersion: 5

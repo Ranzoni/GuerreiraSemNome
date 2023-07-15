@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimation), typeof(PlayerMove))]
@@ -7,15 +6,17 @@ public class PlayerAttack : MonoBehaviour
 {
     [Tooltip("Intervalo (em segundos) para acionar um novo ataque após um ataque padrão")]
     [SerializeField] float attackDelay = 1f;
-    [Tooltip("Intervalo (em segundos) para acionar um novo ataque de velocidade")]
+    [Tooltip("Intervalo (em segundos) para acionar um novo ataque de impulso")]
     [SerializeField] float dashAttackDelay = .5f;
+    [Tooltip("Velocidade do ataque de impulso")]
     [SerializeField] float dashSpeed = 4f;
-    [SerializeField] GameObject sword;
+    [Tooltip("Prefab da arma")]
+    [SerializeField] GameObject weapon;
 
     PlayerAnimation playerAnimation;
+    PlayerMove move;
     bool isAttacking;
     bool isDashingAttack;
-    PlayerMove move;
 
     void Start()
     {
@@ -75,11 +76,11 @@ public class PlayerAttack : MonoBehaviour
 
     public void EnableWeaponAttack()
     {
-        sword.SetActive(true);
+        weapon.SetActive(true);
     }
 
     public void DisableWeaponAttack()
     {
-        sword.SetActive(false);
+        weapon.SetActive(false);
     }
 }

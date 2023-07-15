@@ -4,8 +4,14 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int health = 8;
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        health -= damage;
+        if (health > 0)
+            health -= damage;
+    }
+
+    public bool IsDead()
+    {
+        return health <= 0;
     }
 }
