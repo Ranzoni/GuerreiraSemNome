@@ -33,7 +33,10 @@ public class EnemyAI : MonoBehaviour
         if (targetDistance <= rangeFollow)
         {
             if (targetDistance > minimumDistance)
-                move.Move(targetCenterPosition);
+            {
+                if (!attack.IsAttacking())
+                    move.Move(targetCenterPosition);
+            }
             else
             {
                 move.Flip(targetCenterPosition);

@@ -1,9 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyAnimation))]
 public class EnemyAttack : MonoBehaviour
 {
+    [Tooltip("Tempo em que o inimigo realizará o ataque")]
+    [SerializeField] float attackDelay = 1f;
+
     EnemyAnimation enemyAnimation;
+    bool isAttacking;
 
     void Start()
     {
@@ -12,6 +17,22 @@ public class EnemyAttack : MonoBehaviour
 
     public void Attack()
     {
+        if (!isAttacking)
+            StartCoroutine(AttackRoutine());
+    }
+
+    IEnumerator AttackRoutine()
+    {
+        isAttacking = true;
         enemyAnimation.TriggerAttack();
+
+        yield return new WaitForSeconds(attackDelay);
+
+        isAttacking = false;
+    }
+
+    public bool IsAttacking()
+    {
+        return isAttacking;
     }
 }

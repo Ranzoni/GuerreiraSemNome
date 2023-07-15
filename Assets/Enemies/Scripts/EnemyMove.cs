@@ -24,12 +24,10 @@ public class EnemyMove : MonoBehaviour
     {
         if (direction.x > transform.position.x && !isFlipped || direction.x < transform.position.x && isFlipped)
         {
-            enemyAnimation.gameObject.SetActive(false);
             isFlipped = !isFlipped;
             var localScale = transform.localScale;
             localScale.x *= -1;
             transform.localScale = localScale;
-            enemyAnimation.gameObject.SetActive(true);
         }
     }
 
