@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyAnimation))]
 public class EnemyMove : MonoBehaviour
 {
+    [Tooltip("Velocidade de movimentação")]
     [SerializeField] float velocity = 2f;
 
     bool isFlipped;

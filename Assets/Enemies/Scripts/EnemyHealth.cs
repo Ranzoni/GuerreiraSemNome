@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [Tooltip("Quantidade de vida inicial")]
     [SerializeField] int health = 8;
 
     public void TakeDamage(int damage)
