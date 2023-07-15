@@ -53,8 +53,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03, y: 1.21}
-  m_Size: {x: 1.19, y: 2.24}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
   m_Direction: 0
 --- !u!50 &7548053441240982922
 Rigidbody2D:
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   rangeFollow: 5
-  minimumDistance: 2
+  minimumDistance: 1.5
 --- !u!114 &4639974096422153053
 MonoBehaviour:
   m_ObjectHideFlags: 0
