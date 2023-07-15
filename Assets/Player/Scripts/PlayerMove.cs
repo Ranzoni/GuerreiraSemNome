@@ -57,7 +57,10 @@ public class PlayerMove : MonoBehaviour
         {
             isFlipped = !isFlipped;
             var localScale = transform.localScale;
+            var xPosition = transform.position.x;
             localScale.x *= -1;
+            xPosition += localScale.x;
+            transform.position = new Vector2(xPosition, transform.position.y);
             transform.localScale = localScale;
         }
     }

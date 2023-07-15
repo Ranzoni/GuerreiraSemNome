@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
     {
         playerAnimation = GetComponent<PlayerAnimation>();
         move = GetComponent<PlayerMove>();
+        DisableWeaponAttack();
     }
 
     void Update()

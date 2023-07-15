@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdeecd5b48930604bb1695351ce681fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 1
+  attackDelay: 1.2
   dashAttackDelay: 0.5
   dashSpeed: 4
   weapon: {fileID: 4355789932094024771}

@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  rangeFollow: 10
+  rangeFollow: 5
   minimumDistance: 1.5
 --- !u!114 &4639974096422153053
 MonoBehaviour:
