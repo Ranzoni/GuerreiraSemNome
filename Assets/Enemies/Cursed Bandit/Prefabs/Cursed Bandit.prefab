@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  rangeFollow: 5
+  rangeFollow: 28
   minimumDistance: 2
 --- !u!114 &4639974096422153053
 MonoBehaviour:
@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc93358649b3c54c858111da9bb24e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 8
+  health: 14
+  delayHurt: 1
 --- !u!95 &2544734103105576974
 Animator:
   serializedVersion: 5
