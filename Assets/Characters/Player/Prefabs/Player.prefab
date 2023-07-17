@@ -89,9 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b888bdab9dea49e4bac2db211ff69eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 4
+  speed: 4
   jumpHeight: 5
-  delayDash: 1
+  delayForceMotion: 1
+  dashSpeed: 10
+  delayDash: 0.5
 --- !u!114 &4875870032084560489
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,6 +35,9 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
+        if (move.IsDashing())
+            return;
+
         if (isDashingAttack)
         {
             DashAttack();

@@ -172,6 +172,11 @@ public class PlayerMove : MonoBehaviour
         return isForceMotion;
     }
     
+    public bool IsDashing()
+    {
+        return isDashing;
+    }
+
     void OnCollisionEnter2D(Collision2D other)
     {
         if (!other.gameObject.CompareTag("Ground"))
