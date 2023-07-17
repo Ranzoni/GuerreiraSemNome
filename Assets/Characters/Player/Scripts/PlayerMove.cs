@@ -58,7 +58,6 @@ public class PlayerMove : MonoBehaviour
         else
         {
             horizontalMove = ReturnTruncatedHorizontalInput();
-            Debug.Log(horizontalMove);
             if (Input.GetButtonDown("Fire2") && horizontalMove != 0)
                 StartCoroutine(TriggerDash());
         }

@@ -9,12 +9,17 @@ public class Health : MonoBehaviour
     [Tooltip("Tempo de duração do impacto do dano")]
     [SerializeField] float delayHurt = 1f;
 
+    public int MaxHealth { get { return maxHealth; } }
+    public int HealthAmount { get { return health; } }
+
     bool isHurting;
     Coroutine hurtCoroutine;
     CharacterAnimation characterAnimation;
+    int maxHealth;
 
     void Start()
     {
+        maxHealth = health;
         characterAnimation = GetComponent<CharacterAnimation>();
     }
 
