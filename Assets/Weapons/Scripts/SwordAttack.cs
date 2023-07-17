@@ -11,7 +11,8 @@ public class SwordAttack : MonoBehaviour
         health = GetComponentInParent<Health>();
     }
 
-    void Update() {
+    void Update()
+    {
         if (health is not null && health.IsDead())
             Destroy(gameObject);
     }

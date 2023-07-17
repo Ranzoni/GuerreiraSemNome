@@ -6,6 +6,7 @@ public class Health : MonoBehaviour
 {
     [Tooltip("Quantidade de vida inicial")]
     [SerializeField] int health = 8;
+    [Tooltip("Tempo de duração do impacto do dano")]
     [SerializeField] float delayHurt = 1f;
 
     bool isHurting;
@@ -30,7 +31,15 @@ public class Health : MonoBehaviour
         hurtCoroutine = StartCoroutine(HurtRoutine());
 
         if (IsDead())
+        {
+            if (CompareTag("Player"))
+            {
+                var gameOver = FindObjectOfType<GameOver>();
+                gameOver.ExecuteGameOver();
+            }
+
             characterAnimation.TriggerDeath();
+        }
     }
 
     IEnumerator HurtRoutine()
