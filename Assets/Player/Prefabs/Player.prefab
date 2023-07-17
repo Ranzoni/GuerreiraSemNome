@@ -14,11 +14,12 @@ GameObject:
   - component: {fileID: 1649716359331668207}
   - component: {fileID: 4875870032084560489}
   - component: {fileID: 587217418050061116}
+  - component: {fileID: 397046612734854412}
   - component: {fileID: 2544734103105576974}
   - component: {fileID: 7144929060107392349}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,6 +120,20 @@ MonoBehaviour:
   dashAttackDelay: 0.5
   dashSpeed: 4
   weapon: {fileID: 4355789932094024771}
+--- !u!114 &397046612734854412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017898334302565471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57eaed6deaa9c9e40b1647e6dde23d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 8
+  delayHurt: 1
 --- !u!95 &2544734103105576974
 Animator:
   serializedVersion: 5

@@ -4,13 +4,28 @@ public class SwordAttack : MonoBehaviour
 {
     [SerializeField] int damage = 2;
 
+    Health health;
+
+    void Start()
+    {
+        health = GetComponentInParent<Health>();
+    }
+
+    void Update() {
+        if (health is not null && health.IsDead())
+            Destroy(gameObject);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Enemy"))
+        if (!(other.CompareTag("Enemy") || other.CompareTag("Player"))) 
             return;
-        
-        var enemyHealth = other.GetComponent<EnemyHealth>();
-        if (enemyHealth is not null)
-            enemyHealth.TakeDamage(damage);
+
+        if (transform.parent.CompareTag("Enemy") && other.CompareTag("Enemy"))
+            return;            
+
+        var health = other.GetComponent<Health>();
+        if (health is not null)
+            health.TakeDamage(damage);
     }
 }

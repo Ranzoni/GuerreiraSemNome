@@ -6,6 +6,8 @@ public class EnemyAttack : MonoBehaviour
 {
     [Tooltip("Tempo em que o inimigo realizará o ataque")]
     [SerializeField] float attackDelay = 1f;
+    [Tooltip("Prefab da arma")]
+    [SerializeField] GameObject weapon;
 
     EnemyAnimation enemyAnimation;
     bool isAttacking;
@@ -34,5 +36,15 @@ public class EnemyAttack : MonoBehaviour
     public bool IsAttacking()
     {
         return isAttacking;
+    }
+
+    public void EnableWeaponAttack()
+    {
+        weapon.SetActive(true);
+    }
+
+    public void DisableWeaponAttack()
+    {
+        weapon.SetActive(false);
     }
 }

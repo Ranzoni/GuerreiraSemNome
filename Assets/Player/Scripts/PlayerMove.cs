@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(PlayerAnimation), typeof(PlayerAttack))]
+[RequireComponent(typeof(PlayerAnimation), typeof(PlayerAttack), typeof(Health))]
 public class PlayerMove : MonoBehaviour
 {
     [Tooltip("Velocidade do movimento")]
@@ -20,18 +20,23 @@ public class PlayerMove : MonoBehaviour
     Coroutine dashCoroutine;
     PlayerAnimation playerAnimation;
     PlayerAttack attack;
+    Health health;
 
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
         attack = GetComponent<PlayerAttack>();
+        health = GetComponent<Health>();
     }
 
     void Update()
     {
-        if (attack.IsAttacking())
+        if (attack.IsAttacking() || health.IsHurting() || health.IsDead())
+        {
+            horizontalMove = 0;
             return;
+        }
 
         ProcessRun();
         ProcessJump();

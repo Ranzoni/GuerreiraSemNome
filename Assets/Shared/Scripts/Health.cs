@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAnimation))]
-public class EnemyHealth : MonoBehaviour
+[RequireComponent(typeof(CharacterAnimation))]
+public class Health : MonoBehaviour
 {
     [Tooltip("Quantidade de vida inicial")]
     [SerializeField] int health = 8;
@@ -10,11 +10,11 @@ public class EnemyHealth : MonoBehaviour
 
     bool isHurting;
     Coroutine hurtCoroutine;
-    EnemyAnimation enemyAnimation;
+    CharacterAnimation characterAnimation;
 
     void Start()
     {
-        enemyAnimation = GetComponent<EnemyAnimation>();
+        characterAnimation = GetComponent<CharacterAnimation>();
     }
 
     public void TakeDamage(int damage)
@@ -30,13 +30,13 @@ public class EnemyHealth : MonoBehaviour
         hurtCoroutine = StartCoroutine(HurtRoutine());
 
         if (IsDead())
-            enemyAnimation.TriggerDeath();
+            characterAnimation.TriggerDeath();
     }
 
     IEnumerator HurtRoutine()
     {
         isHurting = true;
-        enemyAnimation.TriggerHurt();
+        characterAnimation.TriggerHurt();
        
         yield return new WaitForSeconds(delayHurt);
 

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimation), typeof(PlayerMove))]
+[RequireComponent(typeof(PlayerAnimation), typeof(PlayerMove), typeof(Health))]
 public class PlayerAttack : MonoBehaviour
 {
     [Tooltip("Intervalo (em segundos) para acionar um novo ataque após um ataque padrão")]
@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
 
     PlayerAnimation playerAnimation;
     PlayerMove move;
+    Health health;
     bool isAttacking;
     bool isDashingAttack;
 
@@ -22,11 +23,15 @@ public class PlayerAttack : MonoBehaviour
     {
         playerAnimation = GetComponent<PlayerAnimation>();
         move = GetComponent<PlayerMove>();
+        health = GetComponent<Health>();
         DisableWeaponAttack();
     }
 
     void Update()
     {
+        if (health.IsHurting() || health.IsDead())
+            return;
+
         if (isDashingAttack)
         {
             DashAttack();

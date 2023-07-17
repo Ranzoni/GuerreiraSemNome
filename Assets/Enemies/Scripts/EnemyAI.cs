@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMove), typeof(EnemyAttack), typeof(EnemyHealth))]
+[RequireComponent(typeof(EnemyMove), typeof(EnemyAttack), typeof(Health))]
 public class EnemyAI : MonoBehaviour
 {
     [Tooltip("Alvo que irá seguir e atacar")]
@@ -12,19 +12,21 @@ public class EnemyAI : MonoBehaviour
 
     EnemyMove move;
     EnemyAttack attack;
-    EnemyHealth health;
+    Health health;
+    Health targetHealth;
 
     void Start()
     {
         move = GetComponent<EnemyMove>();
         attack = GetComponent<EnemyAttack>();
-        health = GetComponent<EnemyHealth>();
+        health = GetComponent<Health>();
+        targetHealth = target.GetComponent<Health>();
     }
 
     void Update()
     {
         move.StopMove();
-        if (health.IsDead() || health.IsHurting())
+        if (health.IsDead() || health.IsHurting() || targetHealth.IsDead())
             return;
 
         var targetCenterPosition = GetCenterPosition(target.transform);
