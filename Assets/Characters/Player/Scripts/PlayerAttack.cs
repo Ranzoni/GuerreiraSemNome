@@ -71,7 +71,7 @@ public class PlayerAttack : MonoBehaviour
 
     float DelayToAnotherAttack()
     {
-        return isDashingAttack ? dashAttackDelay : attackDelay;
+        return attackDelay;
     }
 
     void DashAttack()
@@ -83,7 +83,7 @@ public class PlayerAttack : MonoBehaviour
     
     public bool IsAttacking()
     {
-        return isAttacking;
+        return isAttacking || isDashingAttack;
     }
 
     public void EnableWeaponAttack()
