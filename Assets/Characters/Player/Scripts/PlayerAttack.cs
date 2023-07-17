@@ -6,8 +6,6 @@ public class PlayerAttack : MonoBehaviour
 {
     [Tooltip("Intervalo (em segundos) para acionar um novo ataque após um ataque padrão")]
     [SerializeField] float attackDelay = 1f;
-    [Tooltip("Intervalo (em segundos) para acionar um novo ataque de impulso")]
-    [SerializeField] float dashAttackDelay = .5f;
     [Tooltip("Velocidade do ataque de impulso")]
     [SerializeField] float dashSpeed = 4f;
     [Tooltip("Prefab da arma")]
