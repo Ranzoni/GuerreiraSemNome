@@ -46,7 +46,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-
+    
     Vector2 GetCenterPosition(Transform transform)
     {
         var centerValueX = transform.position.x - (transform.localScale.x / 2);

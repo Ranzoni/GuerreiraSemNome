@@ -30,7 +30,10 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         if (health.IsHurting() || health.IsDead())
+        {
+            DisableWeaponAttack();
             return;
+        }
 
         if (isDashingAttack)
         {

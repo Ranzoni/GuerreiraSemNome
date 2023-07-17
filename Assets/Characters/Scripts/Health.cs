@@ -20,26 +20,21 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (health <= 0)
+        if (IsDead())
             return;
 
         health -= damage;
         
+        ProcessHurt();
+        ProcessDeath();
+    }
+
+    void ProcessHurt()
+    {
         if (isHurting)
             StopCoroutine(hurtCoroutine);
         
         hurtCoroutine = StartCoroutine(HurtRoutine());
-
-        if (IsDead())
-        {
-            if (CompareTag("Player"))
-            {
-                var gameOver = FindObjectOfType<GameOver>();
-                gameOver.ExecuteGameOver();
-            }
-
-            characterAnimation.TriggerDeath();
-        }
     }
 
     IEnumerator HurtRoutine()
@@ -50,6 +45,20 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(delayHurt);
 
         isHurting = false;
+    }
+
+    void ProcessDeath()
+    {
+        if (!IsDead())
+            return;
+
+        if (CompareTag("Player"))
+        {
+            var gameOver = FindObjectOfType<GameOver>();
+            gameOver.ExecuteGameOver();
+        }
+
+        characterAnimation.TriggerDeath();
     }
 
     public bool IsDead()

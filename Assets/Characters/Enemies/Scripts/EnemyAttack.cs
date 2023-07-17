@@ -15,6 +15,7 @@ public class EnemyAttack : MonoBehaviour
     void Start()
     {
         enemyAnimation = GetComponent<EnemyAnimation>();
+        DisableWeaponAttack();
     }
 
     public void Attack()
@@ -42,7 +43,7 @@ public class EnemyAttack : MonoBehaviour
     {
         weapon.SetActive(true);
     }
-
+    
     public void DisableWeaponAttack()
     {
         weapon.SetActive(false);
