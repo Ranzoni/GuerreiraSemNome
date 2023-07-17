@@ -644,7 +644,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.7
+  - time: 0.4
     functionName: DisableWeaponAttack
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -12,4 +12,9 @@ public class PlayerAnimation : CharacterAnimation
     {
         animator.SetTrigger("dashAttack");
     }
+
+    public void TriggerDash()
+    {
+        animator.SetTrigger("dash");
+    }
 }

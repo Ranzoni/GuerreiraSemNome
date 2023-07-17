@@ -5,11 +5,15 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [Tooltip("Velocidade do movimento")]
-    [SerializeField] float velocity = 2f;
+    [SerializeField] float speed = 2f;
     [Tooltip("Altura máxima alcançada com o pulo")]
     [SerializeField] float jumpHeight = 5f;
-    [Tooltip("Tempo para acionar o impulso")]
-    [SerializeField] float delayDash = 1f;
+    [Tooltip("Tempo para acionar o impulso para o ataque de velocidade")]
+    [SerializeField] float delayForceMotion = 1f;
+    [Tooltip("Velocidade da esquiva")]
+    [SerializeField] float dashSpeed = 8f;
+    [Tooltip("Tempo da duração da esquiva")]
+    [SerializeField] float delayDash = .5f;
 
     Rigidbody2D rb2D;
     float horizontalMove;
@@ -17,7 +21,8 @@ public class PlayerMove : MonoBehaviour
     bool jumpTriggered;
     bool isJumping;
     bool isDashing;
-    Coroutine dashCoroutine;
+    bool isForceMotion;
+    Coroutine forceMotionCoroutine;
     PlayerAnimation playerAnimation;
     PlayerAttack attack;
     Health health;
@@ -38,6 +43,9 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
+        if (isDashing)
+            return;
+
         ProcessRun();
         ProcessJump();
         Flip();
@@ -48,7 +56,33 @@ public class PlayerMove : MonoBehaviour
         if (attack.IsAttacking())
             horizontalMove = 0;
         else
-            horizontalMove = Input.GetAxisRaw("Horizontal");
+        {
+            horizontalMove = ReturnTruncatedHorizontalInput();
+            Debug.Log(horizontalMove);
+            if (Input.GetButtonDown("Fire2") && horizontalMove != 0)
+                StartCoroutine(TriggerDash());
+        }
+    }
+
+    int ReturnTruncatedHorizontalInput()
+    {
+        var getAxisRaw = Input.GetAxisRaw("Horizontal");
+        if (getAxisRaw > 0)
+            return 1;
+        else if (getAxisRaw < 0)
+            return -1;
+        else
+            return 0;
+    }
+
+    IEnumerator TriggerDash()
+    {
+        isDashing = true;
+        playerAnimation.TriggerDash();
+
+        yield return new WaitForSeconds(delayDash);
+
+        isDashing = false;
     }
 
     void ProcessJump()
@@ -78,31 +112,32 @@ public class PlayerMove : MonoBehaviour
 
     void Run()
     {
-        ProcessDash();
+        ProcessForceMotion();
 
         playerAnimation.SetRun(horizontalMove != 0);
 
+        var velocity = isDashing ? dashSpeed : speed;
         var newPosition = new Vector2(horizontalMove * velocity, rb2D.velocity.y);
         rb2D.velocity = newPosition;
     }
 
-    void ProcessDash()
+    void ProcessForceMotion()
     {
-        if (horizontalMove == 0 && dashCoroutine is not null)
+        if (horizontalMove == 0 && forceMotionCoroutine is not null)
         {
-            isDashing = false;
-            StopCoroutine(dashCoroutine);
-            dashCoroutine = null;
+            isForceMotion = false;
+            StopCoroutine(forceMotionCoroutine);
+            forceMotionCoroutine = null;
         }
-        else if (dashCoroutine is null)
-            dashCoroutine = StartCoroutine(TriggerDash());
+        else if (forceMotionCoroutine is null)
+            forceMotionCoroutine = StartCoroutine(TriggerForceMotion());
     }
 
-    IEnumerator TriggerDash()
+    IEnumerator TriggerForceMotion()
     {
-        yield return new WaitForSeconds(delayDash);
+        yield return new WaitForSeconds(delayForceMotion);
 
-        isDashing = true;
+        isForceMotion = true;
     }
 
     void Jump()
@@ -132,9 +167,9 @@ public class PlayerMove : MonoBehaviour
         horizontalMove = 0;
     }
 
-    public bool IsDashing()
+    public bool IsForceMotion()
     {
-        return isDashing;
+        return isForceMotion;
     }
     
     void OnCollisionEnter2D(Collision2D other)

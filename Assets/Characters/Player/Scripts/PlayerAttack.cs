@@ -50,9 +50,9 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
-        var isDashing = move.IsDashing();
+        var isForceMotion = move.IsForceMotion();
         move.StopRun();
-        if (isDashing)
+        if (isForceMotion)
         {
             playerAnimation.TriggerDashAttack();
             isDashingAttack = true;
