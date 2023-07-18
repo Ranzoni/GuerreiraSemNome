@@ -3,9 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class ControlSection : MonoBehaviour
 {
-    public bool GameIsStopped { get { return gameIsStopped; } }
+    public bool GamePaused { get { return gamePaused; } }
+    public bool GameFinished { get { return gameFinished; } }
 
-    bool gameIsStopped;
+    bool gamePaused;
+    bool gameFinished;
 
     public void StartGame()
     {
@@ -18,11 +20,18 @@ public class ControlSection : MonoBehaviour
         Application.Quit();
     }
 
-    public void StopGame()
+    public void EndGame()
+    {
+        PauseGame();
+        gameFinished = true;
+    }
+
+    public void PauseGame()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         Time.timeScale = 0;
+        gamePaused = true;
     }
 
     public void ContinueGame()
@@ -30,5 +39,6 @@ public class ControlSection : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
+        gamePaused = false;
     }
 }

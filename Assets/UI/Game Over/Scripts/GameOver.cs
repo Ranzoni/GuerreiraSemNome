@@ -26,7 +26,7 @@ public class GameOver : MonoBehaviour
     {
         yield return new WaitForSeconds(gameOverDelay);
 
-        section.StopGame();
+        section.EndGame();
         gameOver.enabled = true;
     }
 }

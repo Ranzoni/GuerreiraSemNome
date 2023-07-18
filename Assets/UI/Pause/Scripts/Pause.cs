@@ -20,10 +20,10 @@ public class Pause : MonoBehaviour
 
     void Update()
     {
-        if (!Input.GetButtonDown("Cancel"))
+        if (!Input.GetButtonDown("Cancel") || section.GameFinished)
             return;
 
-        if (section.GameIsStopped)
+        if (section.GamePaused)
             ResumeGame();
         else
             PauseGame();
@@ -39,7 +39,7 @@ public class Pause : MonoBehaviour
     void PauseGame()
     {
         pauseCanvas.enabled = true;
-        section.StopGame();
+        section.PauseGame();
         gamePaused.Invoke();
     }
 }
