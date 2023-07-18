@@ -3,9 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : CharacterAnimation
 {
-    public void TriggerJump()
+    public void SetJump(bool active)
     {
-        animator.SetTrigger("jump");
+        animator.SetBool("jump", active);
+    }
+
+    public void SetFall(bool active)
+    {
+        animator.SetBool("fall", active);
     }
 
     public void TriggerDashAttack()

@@ -86,7 +86,8 @@ public class PlayerMove : MonoBehaviour
 
     void ProcessJump()
     {
-        jumpTriggered = Input.GetButton("Jump");
+        if (Input.GetButtonDown("Jump") && !isJumping)
+            jumpTriggered = true;
     }
 
     void Flip()
@@ -105,18 +106,17 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        Run();
-        Jump();
+        Move();
     }
 
-    void Run()
+    void Move()
     {
         ProcessForceMotion();
 
         playerAnimation.SetRun(horizontalMove != 0);
 
         var velocity = isDashing ? dashSpeed : speed;
-        var newPosition = new Vector2(horizontalMove * velocity, rb2D.velocity.y);
+        var newPosition = new Vector2(horizontalMove * velocity, VerticalMove());
         rb2D.velocity = newPosition;
     }
 
@@ -139,16 +139,16 @@ public class PlayerMove : MonoBehaviour
         isForceMotion = true;
     }
 
-    void Jump()
+    float VerticalMove()
     {
         if (!jumpTriggered || isJumping)
-            return;
+            return rb2D.velocity.y;
 
-        playerAnimation.TriggerJump();
-        var newPosition = new Vector2(rb2D.velocity.x, jumpHeight);
-        rb2D.velocity = newPosition;
+        playerAnimation.SetJump(true);
         isJumping = true;
         jumpTriggered = false;
+
+        return jumpHeight;
     }
 
     public bool IsFlipped()
@@ -182,5 +182,15 @@ public class PlayerMove : MonoBehaviour
             return;
 
         isJumping = false;
+        playerAnimation.SetJump(false);
+        playerAnimation.SetFall(false);
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (!other.gameObject.CompareTag("Ground"))
+            return;
+
+        playerAnimation.SetFall(true);
     }
 }
