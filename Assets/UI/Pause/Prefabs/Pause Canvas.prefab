@@ -108,7 +108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6, y: -135}
+  m_AnchoredPosition: {x: -2, y: -135}
   m_SizeDelta: {x: 393.4768, y: 246.3159}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5994450206879516804
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fim de Jogo
+  m_text: Pausado
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a9c4758ddff4fd428409da5ee6f3bc2, type: 2}
   m_sharedMaterial: {fileID: 7681152608237118541, guid: 8a9c4758ddff4fd428409da5ee6f3bc2, type: 2}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 5994450207007218228}
   - component: {fileID: 5994450207007218227}
   m_Layer: 5
-  m_Name: Reiniciar (TMP)
+  m_Name: Continuar (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reiniciar
+  m_text: Continuar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a9c4758ddff4fd428409da5ee6f3bc2, type: 2}
   m_sharedMaterial: {fileID: 7681152608237118541, guid: 8a9c4758ddff4fd428409da5ee6f3bc2, type: 2}
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 5994450207214862988}
   - component: {fileID: 5994450207214862987}
   m_Layer: 5
-  m_Name: Botao Reiniciar TMP
+  m_Name: Botao Continuar TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,9 +489,9 @@ GameObject:
   - component: {fileID: 5994450207929740251}
   - component: {fileID: 5994450207929740250}
   - component: {fileID: 5994450207929740249}
-  - component: {fileID: 2268732601280291332}
+  - component: {fileID: 4589214521380231240}
   m_Layer: 5
-  m_Name: Game Over Canvas
+  m_Name: Pause Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2268732601280291332
+--- !u!114 &4589214521380231240
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,10 +591,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5994450207929740248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85cfe08fac4a96e48a07197917969e8a, type: 3}
+  m_Script: {fileID: 11500000, guid: a5c632bbe810d924788baa234dbece87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverDelay: 2
   section: {fileID: 0}
 --- !u!1 &6523707065344622509
 GameObject:

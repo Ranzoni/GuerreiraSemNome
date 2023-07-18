@@ -3,12 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class ControlSection : MonoBehaviour
 {
+    public bool GameIsStopped { get { return gameIsStopped; } }
+
+    bool gameIsStopped;
+
     public void StartGame()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Time.timeScale = 1;
-
+        ContinueGame();
         SceneManager.LoadScene(1);
     }
 
@@ -19,8 +20,15 @@ public class ControlSection : MonoBehaviour
 
     public void StopGame()
     {
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         Time.timeScale = 0;
+    }
+
+    public void ContinueGame()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1;
     }
 }
