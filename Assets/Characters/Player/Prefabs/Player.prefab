@@ -122,11 +122,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  jumpHeight: 7
+  jumpHeight: 10
   delayForceMotion: 1
   dashSpeed: 10
   delayDash: 0.5
   groundPoint: {fileID: 5203204328095139825}
+  groundRay: 0.2
 --- !u!114 &4875870032084560489
 MonoBehaviour:
   m_ObjectHideFlags: 0
