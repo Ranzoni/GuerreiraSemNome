@@ -39,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
 
         ProcessForceMotion();
 
-        if (move.IsDashing() || move.IsJumping())
+        if (move.IsDashing || move.IsJumping)
             return;
 
         if (isDashingAttack)
@@ -48,7 +48,7 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
-        if (!Input.GetButtonDown("Fire1") || isAttacking || move.IsJumping())
+        if (!Input.GetButtonDown("Fire1") || isAttacking || move.IsJumping)
             return;
         
         StartCoroutine(Attack());
@@ -56,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
 
     void ProcessForceMotion()
     {
-        if (!move.IsMoving() && checkDashAttackCoroutine is not null)
+        if (!move.IsMoving && checkDashAttackCoroutine is not null)
         {
             dashAttackReadyToUse = false;
             StopCoroutine(checkDashAttackCoroutine);
@@ -75,7 +75,7 @@ public class PlayerAttack : MonoBehaviour
 
     void DashAttack()
     {
-        var direction = move.IsFlipped() ? Vector2.left : Vector2.right;
+        var direction = move.IsFlipped ? Vector2.left : Vector2.right;
         var nextPosition = direction * dashSpeed * Time.deltaTime;
         transform.Translate(nextPosition);
     }

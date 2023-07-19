@@ -16,14 +16,19 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] GameObject groundPoint;
     [Tooltip("Raio de checagem da colisão com o chão")]
     [SerializeField] float groundRay = .2f;
+
+    public bool IsMoving { get { return componentRun.HorizontalMove != 0; } }
+    public bool IsDashing { get { return componentDash.IsDashing; } }
+    public bool IsJumping { get { return componentJump.IsJumping; } }
+    public bool IsFlipped { get { return componentFlip.IsFlipped; } }
     
     PlayerAnimation playerAnimation;
     PlayerAttack playerAttack;
     Health health;
-    ComponentRun playerRun;
-    ComponentDash playerDash;
-    ComponentJump playerJump;
-    ComponentFlip playerFlip;
+    ComponentRun componentRun;
+    ComponentDash componentDash;
+    ComponentJump componentJump;
+    ComponentFlip componentFlip;
 
     #region Classes Components Of PlayerMove
 
@@ -136,11 +141,10 @@ public class PlayerMove : MonoBehaviour
             rb2D.velocity = Vector2.up * jumpHeight;
         }
 
-        public void StopJumping()
+        public void Stop()
         {
             isJumping = false;
             playerAnimation.SetJump(false);
-            playerAnimation.SetFall(false);
         }
     }
 
@@ -173,30 +177,31 @@ public class PlayerMove : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         playerAnimation = GetComponent<PlayerAnimation>();
 
-        playerRun = new ComponentRun(rb2D, playerAttack, playerAnimation);
-        playerDash = new ComponentDash(playerAnimation);
-        playerJump  = new ComponentJump(rb2D, playerAnimation);
-        playerFlip  = new ComponentFlip();
+        componentRun = new ComponentRun(rb2D, playerAttack, playerAnimation);
+        componentDash = new ComponentDash(playerAnimation);
+        componentJump  = new ComponentJump(rb2D, playerAnimation);
+        componentFlip  = new ComponentFlip();
         
         health = GetComponent<Health>();
     }
 
     void Update()
     {
+        ProcessGroundCollision();
+
         if (PlayerHasToStop())
         {
             StopRun();
             return;
         }
 
-        if (playerDash.IsDashing)
+        if (componentDash.IsDashing)
             return;
 
-        ProcessGroundCollision();
-        playerRun.PopulateHorizontalMove();
+        componentRun.PopulateHorizontalMove();
         StartCoroutine(DashRoutine());
-        playerJump.TriggerJump();
-        playerFlip.Execute(transform, playerRun.HorizontalMove);
+        componentJump.TriggerJump();
+        componentFlip.Execute(transform, componentRun.HorizontalMove);
     }
 
     bool PlayerHasToStop()
@@ -208,55 +213,27 @@ public class PlayerMove : MonoBehaviour
     {
         var hit = Physics2D.Raycast(groundPoint.transform.position, Vector2.down, groundRay);
         if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
-            playerJump.StopJumping();
+            componentJump.Stop();
     }
 
     IEnumerator DashRoutine()
     {
-        playerDash.Execute(playerRun.HorizontalMove);
+        componentDash.Execute(componentRun.HorizontalMove);
 
         yield return new WaitForSeconds(delayDash);
 
-        playerDash.Stop();
+        componentDash.Stop();
     }
 
     void FixedUpdate()
     {
-        var moveSpeed = playerDash.IsDashing ? dashSpeed : speed;
-        playerRun.Execute(moveSpeed);
-        playerJump.Execute(jumpHeight);
-    }
-
-    public bool IsMoving()
-    {
-        return playerRun.HorizontalMove != 0;
-    }
-
-    public bool IsFlipped()
-    {
-        return playerFlip.IsFlipped;
-    }
-
-    public bool IsJumping()
-    {
-        return playerJump.IsJumping;
+        var moveSpeed = componentDash.IsDashing ? dashSpeed : speed;
+        componentRun.Execute(moveSpeed);
+        componentJump.Execute(jumpHeight);
     }
 
     public void StopRun()
     {
-        playerRun.Stop();
-    }
-    
-    public bool IsDashing()
-    {
-        return playerDash.IsDashing;
-    }
-
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if (!other.gameObject.CompareTag("Ground"))
-            return;
-
-        playerAnimation.SetFall(true);
+        componentRun.Stop();
     }
 }
