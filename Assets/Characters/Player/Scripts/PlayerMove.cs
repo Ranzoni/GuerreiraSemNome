@@ -45,6 +45,14 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
+        var hit = Physics2D.Raycast(groundPoint.transform.position, Vector2.down, groundRay);
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+            playerAnimation.SetJump(false);
+            playerAnimation.SetFall(false);
+        }
+
         if (isDashing)
             return;
 
@@ -108,13 +116,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        var hit = Physics2D.Raycast(groundPoint.transform.position, Vector2.down, groundRay);
-        if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
-        {
-            isJumping = false;
-            playerAnimation.SetJump(false);
-            playerAnimation.SetFall(false);
-        }
+        
 
         Move();
     }
