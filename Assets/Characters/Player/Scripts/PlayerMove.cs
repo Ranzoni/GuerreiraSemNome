@@ -14,6 +14,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float dashSpeed = 8f;
     [Tooltip("Tempo da duração da esquiva")]
     [SerializeField] float delayDash = .5f;
+    [SerializeField] GameObject groundPoint;
+    [SerializeField] float groundRay = .2f;
 
     Rigidbody2D rb2D;
     float horizontalMove;
@@ -106,6 +108,14 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        var hit = Physics2D.Raycast(groundPoint.transform.position, Vector2.down, groundRay);
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+            playerAnimation.SetJump(false);
+            playerAnimation.SetFall(false);
+        }
+
         Move();
     }
 
@@ -174,16 +184,6 @@ public class PlayerMove : MonoBehaviour
     public bool IsDashing()
     {
         return isDashing;
-    }
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (!other.gameObject.CompareTag("Ground"))
-            return;
-
-        isJumping = false;
-        playerAnimation.SetJump(false);
-        playerAnimation.SetFall(false);
     }
 
     void OnCollisionExit2D(Collision2D other)

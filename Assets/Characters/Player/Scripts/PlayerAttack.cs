@@ -33,7 +33,7 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
-        if (move.IsDashing())
+        if (move.IsDashing() || move.IsJumping())
             return;
 
         if (isDashingAttack)
@@ -61,15 +61,10 @@ public class PlayerAttack : MonoBehaviour
         else
             playerAnimation.TriggerAttack();
 
-        yield return new WaitForSeconds(DelayToAnotherAttack());
+        yield return new WaitForSeconds(attackDelay);
 
         isDashingAttack = false;
         isAttacking = false;
-    }
-
-    float DelayToAnotherAttack()
-    {
-        return attackDelay;
     }
 
     void DashAttack()
