@@ -10,12 +10,16 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float dashSpeed = 4f;
     [Tooltip("Prefab da arma")]
     [SerializeField] GameObject weapon;
+    [Tooltip("Tempo para liberar o ataque de velocidade (ele é contado enquanto o jogador estiver em movimento)")]
+    [SerializeField] float delayForceMotion = 1f;
 
     PlayerAnimation playerAnimation;
     PlayerMove move;
     Health health;
     bool isAttacking;
     bool isDashingAttack;
+    Coroutine checkDashAttackCoroutine;
+    bool dashAttackReadyToUse;
 
     void Start()
     {
@@ -33,6 +37,8 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
+        ProcessForceMotion();
+
         if (move.IsDashing() || move.IsJumping())
             return;
 
@@ -48,12 +54,37 @@ public class PlayerAttack : MonoBehaviour
         StartCoroutine(Attack());
     }
 
+    void ProcessForceMotion()
+    {
+        if (!move.IsMoving() && checkDashAttackCoroutine is not null)
+        {
+            dashAttackReadyToUse = false;
+            StopCoroutine(checkDashAttackCoroutine);
+            checkDashAttackCoroutine = null;
+        }
+        else if (checkDashAttackCoroutine is null)
+            checkDashAttackCoroutine = StartCoroutine(CheckDashAttackRoutine());
+    }
+
+    IEnumerator CheckDashAttackRoutine()
+    {
+        yield return new WaitForSeconds(delayForceMotion);
+
+        dashAttackReadyToUse = true;
+    }
+
+    void DashAttack()
+    {
+        var direction = move.IsFlipped() ? Vector2.left : Vector2.right;
+        var nextPosition = direction * dashSpeed * Time.deltaTime;
+        transform.Translate(nextPosition);
+    }
+
     IEnumerator Attack()
     {
         isAttacking = true;
-        var isForceMotion = move.IsForceMotion();
         move.StopRun();
-        if (isForceMotion)
+        if (dashAttackReadyToUse)
         {
             playerAnimation.TriggerDashAttack();
             isDashingAttack = true;
@@ -65,13 +96,6 @@ public class PlayerAttack : MonoBehaviour
 
         isDashingAttack = false;
         isAttacking = false;
-    }
-
-    void DashAttack()
-    {
-        var direction = move.IsFlipped() ? Vector2.left : Vector2.right;
-        var nextPosition = direction * dashSpeed * Time.deltaTime;
-        transform.Translate(nextPosition);
     }
     
     public bool IsAttacking()
