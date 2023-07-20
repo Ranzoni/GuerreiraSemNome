@@ -537,18 +537,6 @@ PrefabInstance:
       propertyPath: attackDelay
       value: 0.8
       objectReference: {fileID: 0}
-    - target: {fileID: 1649716359331668207, guid: 2f7a26b03e0666a44ac15ee1ece44f7c, type: 3}
-      propertyPath: jumpHeight
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7548053441240982922, guid: 2f7a26b03e0666a44ac15ee1ece44f7c, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7548053441240982922, guid: 2f7a26b03e0666a44ac15ee1ece44f7c, type: 3}
-      propertyPath: m_GravityScale
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 9017898334302565470, guid: 2f7a26b03e0666a44ac15ee1ece44f7c, type: 3}
       propertyPath: m_RootOrder
       value: 3
