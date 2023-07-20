@@ -75,6 +75,12 @@ public class PlayerMove : MonoBehaviour
             rb2D.velocity = newPosition;
         }
 
+        public void ExecuteDash(float speed)
+        {
+            var newPosition = new Vector2(speed, rb2D.velocity.y);
+            rb2D.velocity = newPosition;
+        }
+
         public void Stop()
         {
             horizontalMove = 0;
@@ -84,8 +90,10 @@ public class PlayerMove : MonoBehaviour
     class ComponentDash
     {
         public bool IsDashing { get { return isDashing; } }
+        public float HorizontalMove { get { return horizontalMove; } }
 
         bool isDashing;
+        float horizontalMove;
         readonly PlayerAnimation playerAnimation;
 
         public ComponentDash(PlayerAnimation playerAnimation)
@@ -95,11 +103,9 @@ public class PlayerMove : MonoBehaviour
 
         public void Execute(float horizontalMove)
         {
-            if (Input.GetButtonDown("Fire2") && horizontalMove != 0)
-            {
-                isDashing = true;
-                playerAnimation.TriggerDash();
-            }
+            this.horizontalMove = horizontalMove;
+            isDashing = true;
+            playerAnimation.TriggerDash();
         }
 
         public void Stop()
@@ -184,6 +190,25 @@ public class PlayerMove : MonoBehaviour
         componentFlip  = new ComponentFlip();
         
         health = GetComponent<Health>();
+
+        StartCoroutine(DashRoutine());
+    }
+
+    IEnumerator DashRoutine()
+    {
+        while (true)
+        {
+            if (Input.GetButton("Fire2") && IsMoving && !IsDashing)
+            {
+                componentDash.Execute(componentRun.HorizontalMove);
+
+                yield return new WaitForSeconds(delayDash);
+
+                componentDash.Stop();
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     void Update()
@@ -200,7 +225,6 @@ public class PlayerMove : MonoBehaviour
             return;
 
         componentRun.PopulateHorizontalMove();
-        StartCoroutine(DashRoutine());
         componentJump.TriggerJump();
         componentFlip.Execute(transform, componentRun.HorizontalMove);
     }
@@ -219,19 +243,13 @@ public class PlayerMove : MonoBehaviour
             playerAnimation.SetFall(true);
     }
 
-    IEnumerator DashRoutine()
-    {
-        componentDash.Execute(componentRun.HorizontalMove);
-
-        yield return new WaitForSeconds(delayDash);
-
-        componentDash.Stop();
-    }
-
     void FixedUpdate()
     {
-        var moveSpeed = componentDash.IsDashing ? dashSpeed : speed;
-        componentRun.Execute(moveSpeed);
+        if (componentDash.IsDashing)
+            componentRun.ExecuteDash(dashSpeed * componentDash.HorizontalMove);
+        else
+            componentRun.Execute(speed);
+            
         componentJump.Execute(jumpHeight);
     }
 

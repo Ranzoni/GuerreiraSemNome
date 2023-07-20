@@ -121,13 +121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b888bdab9dea49e4bac2db211ff69eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 5
   jumpHeight: 10
-  delayForceMotion: 1
   dashSpeed: 10
-  delayDash: 0.5
+  delayDash: 0.8
   groundPoint: {fileID: 5203204328095139825}
-  groundRay: 0.2
+  groundRay: 0.05
 --- !u!114 &4875870032084560489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +154,7 @@ MonoBehaviour:
   attackDelay: 1.2
   dashSpeed: 4
   weapon: {fileID: 4355789932094024771}
+  delayForceMotion: 1
 --- !u!114 &397046612734854412
 MonoBehaviour:
   m_ObjectHideFlags: 0
