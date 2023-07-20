@@ -8,14 +8,9 @@ public class PlayerAnimation : CharacterAnimation
         animator.SetBool("jump", active);
     }
 
-    public void TriggerFall()
+    public void SetFall(bool active)
     {
-        animator.SetTrigger("fall");
-    }
-
-    public void TriggerStopFall()
-    {
-        animator.SetTrigger("stopFall");
+        animator.SetBool("fall", active);
     }
 
     public void TriggerDashAttack()

@@ -145,6 +145,7 @@ public class PlayerMove : MonoBehaviour
         {
             isJumping = false;
             playerAnimation.SetJump(false);
+            playerAnimation.SetFall(false);
         }
     }
 
@@ -214,6 +215,8 @@ public class PlayerMove : MonoBehaviour
         var hit = Physics2D.Raycast(groundPoint.transform.position, Vector2.down, groundRay);
         if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
             componentJump.Stop();
+        else
+            playerAnimation.SetFall(true);
     }
 
     IEnumerator DashRoutine()
