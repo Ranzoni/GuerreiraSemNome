@@ -529,14 +529,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 397046612734854412, guid: 2f7a26b03e0666a44ac15ee1ece44f7c, type: 3}
-      propertyPath: delayHurt
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 587217418050061116, guid: 2f7a26b03e0666a44ac15ee1ece44f7c, type: 3}
-      propertyPath: attackDelay
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 9017898334302565470, guid: 2f7a26b03e0666a44ac15ee1ece44f7c, type: 3}
       propertyPath: m_RootOrder
       value: 3
