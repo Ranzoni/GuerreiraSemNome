@@ -3,13 +3,12 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyMove), typeof(EnemyAttack), typeof(Health))]
 public class EnemyAI : MonoBehaviour
 {
-    [Tooltip("Alvo que irá seguir e atacar")]
-    [SerializeField] GameObject target;
     [Tooltip("Raio de visão que irá encadiar a perseguição ao alvo")]
     [SerializeField] float rangeFollow = 10f;
     [Tooltip("A distância mínima entre o inimigo e o alvo na perseguição")]
     [SerializeField] float minimumDistance = 2f;
 
+    GameObject target;
     EnemyMove move;
     EnemyAttack attack;
     Health health;
@@ -17,6 +16,7 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        target = FindObjectOfType<PlayerMove>().gameObject;
         move = GetComponent<EnemyMove>();
         attack = GetComponent<EnemyAttack>();
         health = GetComponent<Health>();

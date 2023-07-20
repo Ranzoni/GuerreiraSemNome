@@ -12,10 +12,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float dashSpeed = 8f;
     [Tooltip("Tempo da duração da esquiva")]
     [SerializeField] float delayDash = .5f;
-    [Tooltip("Objeto que irá checar o ponto de colisão com o chão (Ele deve estar posicionado no ponto que o personagem irá se chocar com o chão)")]
-    [SerializeField] GameObject groundPoint;
-    [Tooltip("Raio de checagem da colisão com o chão")]
-    [SerializeField] float groundRay = .2f;
 
     public bool IsMoving { get { return componentRun.HorizontalMove != 0; } }
     public bool IsDashing { get { return componentDash.IsDashing; } }
@@ -151,7 +147,6 @@ public class PlayerMove : MonoBehaviour
         {
             isJumping = false;
             playerAnimation.SetJump(false);
-            playerAnimation.SetFall(false);
         }
     }
 
@@ -213,8 +208,6 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        ProcessGroundCollision();
-
         if (PlayerHasToStop())
         {
             StopRun();
@@ -234,15 +227,6 @@ public class PlayerMove : MonoBehaviour
         return playerAttack.IsAttacking() || health.IsHurting() || health.IsDead();
     }
 
-    void ProcessGroundCollision()
-    {
-        var hit = Physics2D.Raycast(groundPoint.transform.position, Vector2.down, groundRay);
-        if (hit.collider != null && hit.collider.gameObject.CompareTag("Ground"))
-            componentJump.Stop();
-        else
-            playerAnimation.SetFall(true);
-    }
-
     void FixedUpdate()
     {
         if (componentDash.IsDashing)
@@ -256,5 +240,15 @@ public class PlayerMove : MonoBehaviour
     public void StopRun()
     {
         componentRun.Stop();
+    }
+
+    public void StopJump()
+    {
+        componentJump.Stop();
+    }
+
+    public void SetFall(bool active)
+    {
+        playerAnimation.SetFall(active);
     }
 }
