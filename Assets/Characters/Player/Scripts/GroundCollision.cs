@@ -2,39 +2,21 @@ using UnityEngine;
 
 public class GroundCollision : MonoBehaviour
 {
+    [Tooltip("Pontos de colisão do chão")]
+    [SerializeField] Transform[] groundChecks;
+    [Tooltip("Layer de checagem do chão")]
+    [SerializeField] LayerMask groundLayer;
+    
     PlayerMove playerMove;
 
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
-    }
-
-    // void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     if (!other.gameObject.CompareTag("Ground"))
-    //         return;
-
-    //     playerMove.StopJump();
-    //     playerMove.SetFall(false);
-    // }
-
-    // void OnCollisionExit2D(Collision2D other)
-    // {
-    //     if (!other.gameObject.CompareTag("Ground"))
-    //         return;
-
-    //     playerMove.SetFall(true);
-    // }
-
-    public Transform[] groundChecks;
-    public LayerMask groundLayer;
-
-    bool isGrounded = false;
+    }    
 
     private void FixedUpdate()
     {
-        // Verifica se algum dos pontos groundChecks está tocando o chão (Layer "Ground")
-        isGrounded = CheckGrounded();
+        var isGrounded = CheckGrounded();
 
         if (isGrounded)
             playerMove.StopJump();
