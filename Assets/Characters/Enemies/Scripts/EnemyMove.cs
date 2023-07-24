@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAnimation))]
+[RequireComponent(typeof(CharacterAnimation))]
 public class EnemyMove : MonoBehaviour
 {
     [Tooltip("Velocidade de movimentação")]
     [SerializeField] float velocity = 2f;
 
     bool isFlipped;
-    EnemyAnimation enemyAnimation;
+    CharacterAnimation enemyAnimation;
 
     void Start()
     {
