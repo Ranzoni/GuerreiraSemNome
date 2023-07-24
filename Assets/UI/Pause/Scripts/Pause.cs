@@ -6,16 +6,18 @@ public class Pause : MonoBehaviour
 {
     [Tooltip("Prefab com o script para controle de sessão do jogo")]
     [SerializeField] ControlSection section;
-
-    public UnityEvent gamePaused;
-    public UnityEvent gameResumed;
+    [SerializeField] UnityEvent gamePaused;
+    [SerializeField] UnityEvent gameResumed;
 
     Canvas pauseCanvas;
+    FirstButtonController buttonController;
 
     void Start()
     {
         pauseCanvas = GetComponent<Canvas>();
         pauseCanvas.enabled = false;
+
+        buttonController = FindFirstObjectByType<FirstButtonController>();
     }
 
     void Update()
@@ -38,6 +40,7 @@ public class Pause : MonoBehaviour
 
     void PauseGame()
     {
+        buttonController.SelectPauseButton();
         pauseCanvas.enabled = true;
         section.PauseGame();
         gamePaused.Invoke();

@@ -10,11 +10,14 @@ public class GameOver : MonoBehaviour
     [SerializeField] ControlSection section;
 
     Canvas gameOver;
+    FirstButtonController buttonController;
 
     void Start()
     {
         gameOver = GetComponent<Canvas>();
         gameOver.enabled = false;
+
+        buttonController = FindFirstObjectByType<FirstButtonController>();
     }    
 
     public void ExecuteGameOver()
@@ -27,6 +30,7 @@ public class GameOver : MonoBehaviour
         yield return new WaitForSeconds(gameOverDelay);
 
         section.EndGame();
+        buttonController.SelectGameOverButton();
         gameOver.enabled = true;
     }
 }
