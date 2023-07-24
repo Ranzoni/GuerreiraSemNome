@@ -1,20 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAnimation))]
-public class EnemyAttack : MonoBehaviour
+[RequireComponent(typeof(CharacterAnimation))]
+public class BanditAttack : MonoBehaviour
 {
     [Tooltip("Tempo em que o inimigo realizará o ataque")]
     [SerializeField] float attackDelay = 1f;
     [Tooltip("Prefab da arma")]
     [SerializeField] GameObject weapon;
 
-    EnemyAnimation enemyAnimation;
+    CharacterAnimation characterAnimation;
     bool isAttacking;
 
     void Start()
     {
-        enemyAnimation = GetComponent<EnemyAnimation>();
+        characterAnimation = GetComponent<CharacterAnimation>();
         DisableWeaponAttack();
     }
 
@@ -27,7 +27,7 @@ public class EnemyAttack : MonoBehaviour
     IEnumerator AttackRoutine()
     {
         isAttacking = true;
-        enemyAnimation.TriggerAttack();
+        characterAnimation.TriggerAttack();
 
         yield return new WaitForSeconds(attackDelay);
 

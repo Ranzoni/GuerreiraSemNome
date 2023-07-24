@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public abstract class CharacterAnimation : MonoBehaviour
+public class CharacterAnimation : MonoBehaviour
 {
     protected Animator animator;
 

@@ -2,32 +2,26 @@ using UnityEngine;
 
 public class BringerOfDeathAI : MonoBehaviour
 {
-    [Tooltip("Raio de visão que irá encadiar a perseguição ao alvo")]
-    [SerializeField] float rangeOfVision = 10f;
     [Tooltip("Raio de visão que irá encadiar o ataque corpo-a-corpo ao alvo")]
     [SerializeField] float rangeToFollow = 5f;
     [Tooltip("A distância mínima entre o inimigo e o alvo na perseguição")]
     [SerializeField] float minimumDistance = 2f;
 
     GameObject target;
-    EnemyMove move;
+    BringerOfDeathMove move;
 
     void Start()
     {
         target = FindObjectOfType<PlayerMove>().gameObject;
-        move = GetComponent<EnemyMove>();
+        move = GetComponent<BringerOfDeathMove>();
     }
 
     void Update()
     {
         move.StopMove();
 
-        var centerPosition = GetCenterPosition(transform);
         var targetCenterPosition = GetCenterPosition(target.transform);
-        var targetDistance = Vector2.Distance(centerPosition, targetCenterPosition);
-
-        if (targetDistance > rangeOfVision)
-            return;
+        var targetDistance = Vector2.Distance(transform.position, targetCenterPosition);
             
         if (targetDistance <= rangeToFollow)
             ProcessMelee(targetDistance, targetCenterPosition);
@@ -51,7 +45,7 @@ public class BringerOfDeathAI : MonoBehaviour
 
     void MeleeAttack(Vector2 position)
     {
-        move.Flip(position);
+        // move.Flip(position);
         // attack.Attack();
         Debug.Log("Ataque corpo-a-corpo");
     }

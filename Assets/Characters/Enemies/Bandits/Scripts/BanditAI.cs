@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMove), typeof(EnemyAttack), typeof(Health))]
-public class EnemyAI : MonoBehaviour
+[RequireComponent(typeof(BanditMove), typeof(BanditAttack), typeof(Health))]
+public class BanditAI : MonoBehaviour
 {
     [Tooltip("Raio de visão que irá encadiar a perseguição ao alvo")]
     [SerializeField] float rangeFollow = 10f;
@@ -9,16 +9,16 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float minimumDistance = 2f;
 
     GameObject target;
-    EnemyMove move;
-    EnemyAttack attack;
+    BanditMove move;
+    BanditAttack attack;
     Health health;
     Health targetHealth;
 
     void Start()
     {
         target = FindObjectOfType<PlayerMove>().gameObject;
-        move = GetComponent<EnemyMove>();
-        attack = GetComponent<EnemyAttack>();
+        move = GetComponent<BanditMove>();
+        attack = GetComponent<BanditAttack>();
         health = GetComponent<Health>();
         targetHealth = target.GetComponent<Health>();
     }

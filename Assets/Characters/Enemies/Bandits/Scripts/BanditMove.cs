@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterAnimation))]
-public class EnemyMove : MonoBehaviour
+public class BanditMove : MonoBehaviour
 {
     [Tooltip("Velocidade de movimentação")]
     [SerializeField] float velocity = 2f;
@@ -11,7 +11,7 @@ public class EnemyMove : MonoBehaviour
 
     void Start()
     {
-        enemyAnimation = GetComponent<EnemyAnimation>();
+        enemyAnimation = GetComponent<CharacterAnimation>();
     }
 
     public void Move(Vector2 direction)

@@ -14,10 +14,11 @@ GameObject:
   - component: {fileID: 1645636161672396147}
   - component: {fileID: 6541529114590995774}
   - component: {fileID: 4639974096422153053}
-  - component: {fileID: 3386633925874529116}
+  - component: {fileID: 3716240651885908253}
   - component: {fileID: 5154472135550599465}
   - component: {fileID: 2544734103105576974}
   - component: {fileID: 2408721159455294892}
+  - component: {fileID: 6531709597379751044}
   m_Layer: 6
   m_Name: Cursed Bandit
   m_TagString: Enemy
@@ -103,7 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e5a01dd6dbca5469dbfd673789d821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   rangeFollow: 18
   minimumDistance: 2
 --- !u!114 &4639974096422153053
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDelay: 1
   weapon: {fileID: 7247000760620272828}
---- !u!114 &3386633925874529116
+--- !u!114 &3716240651885908253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9017898334302565471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e495f226b4a19374d9f33c2081b833de, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c84e6caae8fae64da51a3097ecd90cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5154472135550599465
@@ -219,6 +219,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6531709597379751044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017898334302565471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c84e6caae8fae64da51a3097ecd90cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2474433447468089639
 PrefabInstance:
   m_ObjectHideFlags: 0
