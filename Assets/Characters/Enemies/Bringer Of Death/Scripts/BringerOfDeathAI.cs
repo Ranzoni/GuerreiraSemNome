@@ -9,11 +9,13 @@ public class BringerOfDeathAI : MonoBehaviour
 
     GameObject target;
     BringerOfDeathMove move;
+    BringerOfDeathAttack attack;
 
     void Start()
     {
         target = FindObjectOfType<PlayerMove>().gameObject;
         move = GetComponent<BringerOfDeathMove>();
+        attack = GetComponent<BringerOfDeathAttack>();
     }
 
     void Update()
@@ -40,18 +42,11 @@ public class BringerOfDeathAI : MonoBehaviour
         if (targetDistance > minimumDistance)
             move.Move(targetCenterPosition);
         else
-            MeleeAttack(targetCenterPosition);
-    }
-
-    void MeleeAttack(Vector2 position)
-    {
-        // move.Flip(position);
-        // attack.Attack();
-        Debug.Log("Ataque corpo-a-corpo");
+            attack.MeleeAttack();
     }
 
     void SpellAttack()
     {
-        Debug.Log("Ataque de magia");
+        attack.SpellAttack();
     }
 }
