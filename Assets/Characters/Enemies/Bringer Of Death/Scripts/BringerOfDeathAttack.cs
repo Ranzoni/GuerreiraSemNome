@@ -5,9 +5,13 @@ using UnityEngine;
 public class BringerOfDeathAttack : MonoBehaviour
 {
     [Tooltip("Tempo em que realizará o ataque")]
-    [SerializeField] float attackDelay = 1f;
+    [SerializeField] float meleeAttackDelay = 1f;
+    [Tooltip("Tempo em que realizará o ataque")]
+    [SerializeField] float spellAttackDelay = 2f;
     [Tooltip("Prefab da arma")]
     [SerializeField] GameObject weapon;
+    [Tooltip("Prefab da magia")]
+    [SerializeField] GameObject spell;
 
     BringerOfDeathAnimation animator;
     bool isAttacking;
@@ -15,6 +19,7 @@ public class BringerOfDeathAttack : MonoBehaviour
     void Start()
     {
         animator = GetComponent<BringerOfDeathAnimation>();
+        spell.SetActive(false);
 
         DisableWeaponAttack();
     }
@@ -40,24 +45,29 @@ public class BringerOfDeathAttack : MonoBehaviour
         isAttacking = true;
         animator.TriggerMeleeAttack();
 
-        yield return new WaitForSeconds(attackDelay);
+        yield return new WaitForSeconds(meleeAttackDelay);
 
         isAttacking = false;
     }
 
-    public void SpellAttack()
+    public void SpellAttack(Vector2 targetPosition)
     {
         if (!isAttacking)
+        {
+            spell.transform.position = new Vector2(targetPosition.x, spell.transform.position.y);
             StartCoroutine(SpellAttackRoutine());
+        }
     }
 
     IEnumerator SpellAttackRoutine()
     {
         isAttacking = true;
         animator.TriggerSpellAttack();
+        spell.SetActive(true);
 
-        yield return new WaitForSeconds(attackDelay);
+        yield return new WaitForSeconds(spellAttackDelay);
 
+        spell.SetActive(false);
         isAttacking = false;
     }
 }

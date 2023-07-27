@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwordAttack : MonoBehaviour
+public class WeaponAttack : MonoBehaviour
 {
     [SerializeField] int damage = 2;
 

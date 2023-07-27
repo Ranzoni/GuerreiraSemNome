@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2841945730519548090}
   - component: {fileID: 2544734103105576974}
   - component: {fileID: 2408721159455294892}
+  - component: {fileID: 8289858988682207876}
   m_Layer: 6
   m_Name: BringerOfDeath
   m_TagString: Enemy
@@ -38,6 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6261508732766260244}
+  - {fileID: 62776576753770119}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -133,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDelay: 1
   weapon: {fileID: 811699912989457793}
+  spell: {fileID: 6238243331192152927}
 --- !u!114 &2841945730519548090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +221,85 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8289858988682207876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017898334302565471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307770700b5d929489625b7023dd913c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &1522355472739788887
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9017898334302565470}
+    m_Modifications:
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878189488694528776, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_Name
+      value: Spell
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+--- !u!4 &62776576753770119 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+  m_PrefabInstance: {fileID: 1522355472739788887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6238243331192152927 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4878189488694528776, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+  m_PrefabInstance: {fileID: 1522355472739788887}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5586658244058427418
 PrefabInstance:
   m_ObjectHideFlags: 0

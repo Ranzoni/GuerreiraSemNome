@@ -47,6 +47,6 @@ public class BringerOfDeathAI : MonoBehaviour
 
     void SpellAttack()
     {
-        attack.SpellAttack();
+        attack.SpellAttack(target.transform.position);
     }
 }
