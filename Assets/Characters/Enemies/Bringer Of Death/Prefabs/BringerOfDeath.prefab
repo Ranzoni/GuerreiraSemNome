@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57eaed6deaa9c9e40b1647e6dde23d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 8
+  health: 20
   delayHurt: 1
 --- !u!114 &4140793673452104534
 MonoBehaviour:
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeToFollow: 4
   minimumDistance: 2
+  timeToDestroyAfterDeath: 1.3
 --- !u!114 &2414090440513258232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f229d7913ee145742b552602127b5db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 1
+  meleeAttackDelay: 1
+  spellAttackDelay: 1
   weapon: {fileID: 811699912989457793}
   spell: {fileID: 6238243331192152927}
 --- !u!114 &2841945730519548090

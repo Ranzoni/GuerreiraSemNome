@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BringerOfDeathAI : MonoBehaviour
@@ -6,21 +7,38 @@ public class BringerOfDeathAI : MonoBehaviour
     [SerializeField] float rangeToFollow = 5f;
     [Tooltip("A distância mínima entre o inimigo e o alvo na perseguição")]
     [SerializeField] float minimumDistance = 2f;
+    [Tooltip("Tempo para destruir o inimigo após dele ser morto")]
+    [SerializeField] float timeToDestroyAfterDeath = 1f;
 
     GameObject target;
     BringerOfDeathMove move;
     BringerOfDeathAttack attack;
+    Health health;
+    Health targetHealth;
+    bool processDeath;
 
     void Start()
     {
         target = FindObjectOfType<PlayerMove>().gameObject;
         move = GetComponent<BringerOfDeathMove>();
         attack = GetComponent<BringerOfDeathAttack>();
+        health = GetComponent<Health>();
+        targetHealth = target.GetComponent<Health>();
     }
 
     void Update()
     {
         move.StopMove();
+        if (health.IsDead())
+        {
+            if (!processDeath)
+                StartCoroutine(DestroyRoutine());
+
+            return;
+        }
+
+        if (health.IsHurting() || targetHealth.IsDead())
+            return;
 
         var targetCenterPosition = GetCenterPosition(target.transform);
         var targetDistance = Vector2.Distance(transform.position, targetCenterPosition);
@@ -29,6 +47,15 @@ public class BringerOfDeathAI : MonoBehaviour
             ProcessMelee(targetDistance, targetCenterPosition);
         else
             SpellAttack();
+    }
+
+    IEnumerator DestroyRoutine()
+    {
+        processDeath = true;
+
+        yield return new WaitForSeconds(timeToDestroyAfterDeath);
+
+        Destroy(gameObject);
     }
 
     Vector2 GetCenterPosition(Transform transform)
