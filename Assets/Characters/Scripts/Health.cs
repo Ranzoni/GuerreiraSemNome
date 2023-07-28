@@ -9,8 +9,10 @@ public class Health : MonoBehaviour
     [Tooltip("Tempo de duração do impacto do dano")]
     [SerializeField] float delayHurt = 1f;
 
+    public bool IsHurting { get { return isHurting; } }
     public int MaxHealth { get { return maxHealth; } }
     public int HealthAmount { get { return health; } }
+    public bool IsInvincible { get; set; }
 
     bool isHurting;
     Coroutine hurtCoroutine;
@@ -25,7 +27,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (IsDead())
+        if (IsDead() || IsInvincible)
             return;
 
         health -= damage;
@@ -69,10 +71,5 @@ public class Health : MonoBehaviour
     public bool IsDead()
     {
         return health <= 0;
-    }
-
-    public bool IsHurting()
-    {
-        return isHurting;
     }
 }

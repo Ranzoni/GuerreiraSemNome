@@ -29,4 +29,9 @@ public class CharacterAnimation : MonoBehaviour
     {
         animator.SetTrigger("death");
     }
+
+    public void TriggerTeleport()
+    {
+        animator.SetTrigger("teleport");
+    }
 }

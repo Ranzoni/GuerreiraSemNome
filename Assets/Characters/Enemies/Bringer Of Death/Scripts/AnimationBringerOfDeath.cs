@@ -1,4 +1,4 @@
-public class BringerOfDeathAnimation : CharacterAnimation
+public class AnimationBringerOfDeath : CharacterAnimation
 {
     public void TriggerMeleeAttack()
     {

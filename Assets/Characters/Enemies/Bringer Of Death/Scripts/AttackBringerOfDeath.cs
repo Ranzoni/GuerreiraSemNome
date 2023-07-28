@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(BringerOfDeathAnimation))]
+[RequireComponent(typeof(AnimationBringerOfDeath))]
 public class AttackBringerOfDeath : MonoBehaviour
 {
     [Tooltip("Tempo em que realizará o ataque")]
@@ -15,12 +15,12 @@ public class AttackBringerOfDeath : MonoBehaviour
 
     public bool IsAttacking { get { return isAttacking; } }
 
-    BringerOfDeathAnimation animator;
+    AnimationBringerOfDeath animator;
     bool isAttacking;
 
     void Start()
     {
-        animator = GetComponent<BringerOfDeathAnimation>();
+        animator = GetComponent<AnimationBringerOfDeath>();
         spell.SetActive(false);
 
         DisableWeaponAttack();

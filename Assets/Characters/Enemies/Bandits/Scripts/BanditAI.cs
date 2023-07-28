@@ -26,7 +26,7 @@ public class BanditAI : MonoBehaviour
     void Update()
     {
         move.StopMove();
-        if (health.IsDead() || health.IsHurting() || targetHealth.IsDead())
+        if (health.IsDead() || health.IsHurting || targetHealth.IsDead())
             return;
 
         var targetCenterPosition = GetCenterPosition(target.transform);

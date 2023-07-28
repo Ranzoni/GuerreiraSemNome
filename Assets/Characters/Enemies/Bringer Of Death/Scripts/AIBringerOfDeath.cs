@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(MoveBringerOfDeath), typeof(AttackBringerOfDeath))]
+[RequireComponent(typeof(MoveBringerOfDeath), typeof(AttackBringerOfDeath), typeof(TeleportBringerOfDeath))]
 public class AIBringerOfDeath : MonoBehaviour
 {
     [Tooltip("Raio de visão que irá encadiar o ataque corpo-a-corpo ao alvo")]
@@ -9,14 +9,22 @@ public class AIBringerOfDeath : MonoBehaviour
     [Tooltip("A distância mínima entre o inimigo e o alvo na perseguição")]
     [SerializeField] float minimumDistance = 2f;
     [Tooltip("Tempo para destruir o inimigo após dele ser morto")]
-    [SerializeField] float timeToDestroyAfterDeath = 1f;
+    [SerializeField] float delayDestroy = 1f;
+    [Tooltip("Quantidade de golpes para encadiar o teleporte")]
+    [SerializeField] int hitsToTeleport = 2;
+    [Tooltip("Ponto inicial para poder se teleportar")]
+    [SerializeField] Transform startTransformTeleport;
+    [Tooltip("Ponto final para poder se teleportar")]
+    [SerializeField] Transform endTransformTeleport;
 
     GameObject target;
     MoveBringerOfDeath move;
     AttackBringerOfDeath attack;
     Health health;
+    TeleportBringerOfDeath teleport;
     Health targetHealth;
     bool processDeath;
+    int hitsTake;
 
     void Start()
     {
@@ -24,25 +32,32 @@ public class AIBringerOfDeath : MonoBehaviour
         move = GetComponent<MoveBringerOfDeath>();
         attack = GetComponent<AttackBringerOfDeath>();
         health = GetComponent<Health>();
+        teleport = GetComponent<TeleportBringerOfDeath>();
         targetHealth = target.GetComponent<Health>();
+        //REMOVER
+        targetHealth.IsInvincible = true;
     }
 
     void Update()
     {
         move.StopMove();
-        if (health.IsDead())
-        {
-            if (!processDeath)
-                StartCoroutine(DestroyRoutine());
+        if (IsDead())
+            return;
 
+        ProcessTeleport();
+
+        if (!CanTakeAction())
+        {
+            attack.DisableWeaponAttack();
             return;
         }
 
-        if (health.IsHurting() || targetHealth.IsDead() || attack.IsAttacking)
+        if (attack.IsAttacking)
             return;
 
         var targetCenterPosition = GetCenterPosition(target.transform);
         var targetDistance = Vector2.Distance(transform.position, targetCenterPosition);
+        move.Flip(targetCenterPosition);
             
         if (targetDistance <= rangeToFollow)
             ProcessMelee(targetDistance, targetCenterPosition);
@@ -50,13 +65,81 @@ public class AIBringerOfDeath : MonoBehaviour
             SpellAttack();
     }
 
+    bool IsDead()
+    {
+        if (health.IsDead())
+        {
+            if (!processDeath)
+                StartCoroutine(DestroyRoutine());
+
+            attack.DisableWeaponAttack();
+            return true;
+        }
+
+        return false;
+    }
+
     IEnumerator DestroyRoutine()
     {
         processDeath = true;
 
-        yield return new WaitForSeconds(timeToDestroyAfterDeath);
+        yield return new WaitForSeconds(delayDestroy);
 
         Destroy(gameObject);
+    }
+
+    void ProcessTeleport()
+    {
+        if (hitsTake >= hitsToTeleport)
+        {
+            hitsTake = 0;
+            StartCoroutine(TeleportRoutine());
+        }
+
+        hitsTake += health.IsHurting && !teleport.IsTeleporting ? 1 : 0;
+        health.IsInvincible = teleport.IsTeleporting;
+    }
+
+    IEnumerator TeleportRoutine()
+    {
+        teleport.Execute();
+
+        yield return new WaitForSeconds(1f);
+
+        transform.position = PositionToTeleportFound();
+        teleport.Back();
+    }
+
+    Vector2 PositionToTeleportFound()
+    {
+        var starterX = startTransformTeleport.position.x;
+        var endedX = endTransformTeleport.position.x;
+        var targetCenterPosition = GetCenterPosition(target.transform);
+        var lastCost = float.MinValue;
+        var cheapestPosition = transform.position;
+
+        for (var x = starterX; x <= endedX; x++)
+        {
+            var cost = 0f;
+            if ((target.transform.localScale.x > 0 && x < targetCenterPosition.x) || (target.transform.localScale.x < 0 && x > targetCenterPosition.x))
+                cost = 1f;
+
+            var position = new Vector2(x, transform.position.y);
+            cost += Vector2.Distance(targetCenterPosition, position);
+            if (cost > lastCost)
+            {
+                Debug.Log($"X: {x} - Cost: {cost}");
+                lastCost = cost;
+                cheapestPosition = position;
+            }
+        }
+
+        return cheapestPosition;
+    }
+
+    bool CanTakeAction()
+    {
+        return !health.IsHurting && !targetHealth.IsDead() && !teleport.IsTeleporting;
     }
 
     Vector2 GetCenterPosition(Transform transform)

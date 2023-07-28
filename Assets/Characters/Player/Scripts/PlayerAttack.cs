@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (health.IsHurting() || health.IsDead())
+        if (health.IsHurting || health.IsDead())
         {
             DisableWeaponAttack();
             return;

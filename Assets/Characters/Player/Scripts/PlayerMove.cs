@@ -224,7 +224,7 @@ public class PlayerMove : MonoBehaviour
 
     bool PlayerHasToStop()
     {
-        return playerAttack.IsAttacking() || health.IsHurting() || health.IsDead();
+        return playerAttack.IsAttacking() || health.IsHurting || health.IsDead();
     }
 
     void FixedUpdate()
