@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class BringerOfDeathAI : MonoBehaviour
+[RequireComponent(typeof(MoveBringerOfDeath), typeof(AttackBringerOfDeath))]
+public class AIBringerOfDeath : MonoBehaviour
 {
     [Tooltip("Raio de visão que irá encadiar o ataque corpo-a-corpo ao alvo")]
     [SerializeField] float rangeToFollow = 5f;
@@ -11,8 +12,8 @@ public class BringerOfDeathAI : MonoBehaviour
     [SerializeField] float timeToDestroyAfterDeath = 1f;
 
     GameObject target;
-    BringerOfDeathMove move;
-    BringerOfDeathAttack attack;
+    MoveBringerOfDeath move;
+    AttackBringerOfDeath attack;
     Health health;
     Health targetHealth;
     bool processDeath;
@@ -20,8 +21,8 @@ public class BringerOfDeathAI : MonoBehaviour
     void Start()
     {
         target = FindObjectOfType<PlayerMove>().gameObject;
-        move = GetComponent<BringerOfDeathMove>();
-        attack = GetComponent<BringerOfDeathAttack>();
+        move = GetComponent<MoveBringerOfDeath>();
+        attack = GetComponent<AttackBringerOfDeath>();
         health = GetComponent<Health>();
         targetHealth = target.GetComponent<Health>();
     }
@@ -37,7 +38,7 @@ public class BringerOfDeathAI : MonoBehaviour
             return;
         }
 
-        if (health.IsHurting() || targetHealth.IsDead())
+        if (health.IsHurting() || targetHealth.IsDead() || attack.IsAttacking)
             return;
 
         var targetCenterPosition = GetCenterPosition(target.transform);

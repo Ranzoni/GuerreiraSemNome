@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(BringerOfDeathAnimation))]
-public class BringerOfDeathAttack : MonoBehaviour
+public class AttackBringerOfDeath : MonoBehaviour
 {
     [Tooltip("Tempo em que realizará o ataque")]
     [SerializeField] float meleeAttackDelay = 1f;
@@ -12,6 +12,8 @@ public class BringerOfDeathAttack : MonoBehaviour
     [SerializeField] GameObject weapon;
     [Tooltip("Prefab da magia")]
     [SerializeField] GameObject spell;
+
+    public bool IsAttacking { get { return isAttacking; } }
 
     BringerOfDeathAnimation animator;
     bool isAttacking;

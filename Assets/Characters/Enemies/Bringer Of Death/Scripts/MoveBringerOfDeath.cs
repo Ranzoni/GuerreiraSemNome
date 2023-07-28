@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterAnimation))]
-public class BringerOfDeathMove : MonoBehaviour
+public class MoveBringerOfDeath : MonoBehaviour
 {
     [Tooltip("Velocidade de movimentação")]
     [SerializeField] float velocity = 2f;
