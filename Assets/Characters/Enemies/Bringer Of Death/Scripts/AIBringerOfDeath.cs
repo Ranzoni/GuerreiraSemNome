@@ -12,6 +12,8 @@ public class AIBringerOfDeath : MonoBehaviour
     [SerializeField] float delayDestroy = 1f;
     [Tooltip("Quantidade de golpes para encadiar o teleporte")]
     [SerializeField] int hitsToTeleport = 2;
+    [Tooltip("Tempo para destruir o inimigo após dele ser morto")]
+    [SerializeField] float delayTeleport = 2f;
     [Tooltip("Ponto inicial para poder se teleportar")]
     [SerializeField] Transform startTransformTeleport;
     [Tooltip("Ponto final para poder se teleportar")]
@@ -34,8 +36,6 @@ public class AIBringerOfDeath : MonoBehaviour
         health = GetComponent<Health>();
         teleport = GetComponent<TeleportBringerOfDeath>();
         targetHealth = target.GetComponent<Health>();
-        //REMOVER
-        targetHealth.IsInvincible = true;
     }
 
     void Update()
@@ -96,7 +96,7 @@ public class AIBringerOfDeath : MonoBehaviour
             StartCoroutine(TeleportRoutine());
         }
 
-        hitsTake += health.IsHurting && !teleport.IsTeleporting ? 1 : 0;
+        
         health.IsInvincible = teleport.IsTeleporting;
     }
 
@@ -104,9 +104,10 @@ public class AIBringerOfDeath : MonoBehaviour
     {
         teleport.Execute();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(delayTeleport);
 
         transform.position = PositionToTeleportFound();
+        move.Flip(target.transform.position);
         teleport.Back();
     }
 
@@ -128,7 +129,6 @@ public class AIBringerOfDeath : MonoBehaviour
             cost += Vector2.Distance(targetCenterPosition, position);
             if (cost > lastCost)
             {
-                Debug.Log($"X: {x} - Cost: {cost}");
                 lastCost = cost;
                 cheapestPosition = position;
             }
@@ -159,5 +159,11 @@ public class AIBringerOfDeath : MonoBehaviour
     void SpellAttack()
     {
         attack.SpellAttack(target.transform.position);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PlayerWeapon") && health.IsHurting && !teleport.IsTeleporting)
+            hitsTake += 1;
     }
 }

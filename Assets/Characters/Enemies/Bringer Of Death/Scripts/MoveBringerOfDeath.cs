@@ -29,7 +29,7 @@ public class MoveBringerOfDeath : MonoBehaviour
             isFlipped = !isFlipped;
             var localScale = transform.localScale;
             localScale.x *= -1;
-            var xPosition = transform.position.x - (objCollider2D.size.x + Mathf.Abs(localScale.x)) * localScale.x;
+            var xPosition = transform.position.x - (objCollider2D.size.x + Mathf.Abs(localScale.x) + 1) * localScale.x;
             transform.position = new Vector2(xPosition, transform.position.y);
             transform.localScale = localScale;
         }

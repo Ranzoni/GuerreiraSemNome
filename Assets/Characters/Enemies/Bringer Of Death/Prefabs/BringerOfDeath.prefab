@@ -106,9 +106,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f91ddd00bd720488ec888923bb306d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeToFollow: 4
+  rangeToFollow: 6
   minimumDistance: 2
-  timeToDestroyAfterDeath: 1.3
+  delayDestroy: 1
+  hitsToTeleport: 2
+  delayTeleport: 1.025
+  startTransformTeleport: {fileID: 0}
+  endTransformTeleport: {fileID: 0}
 --- !u!114 &2414090440513258232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f229d7913ee145742b552602127b5db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAttackDelay: 0.8
+  meleeAttackDelay: 1
   spellAttackDelay: 1
   weapon: {fileID: 811699912989457793}
   spell: {fileID: 6238243331192152927}
@@ -150,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e51082aa49683499582fa20c27cc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayBackTeleport: 1
 --- !u!114 &8289858988682207876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +361,22 @@ PrefabInstance:
     - target: {fileID: 5099324750693371291, guid: 402a65d4a5affe54fa4b58617830da48, type: 3}
       propertyPath: m_Name
       value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838257096997953605, guid: 402a65d4a5affe54fa4b58617830da48, type: 3}
+      propertyPath: m_Size.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838257096997953605, guid: 402a65d4a5affe54fa4b58617830da48, type: 3}
+      propertyPath: m_Size.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838257096997953605, guid: 402a65d4a5affe54fa4b58617830da48, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838257096997953605, guid: 402a65d4a5affe54fa4b58617830da48, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 402a65d4a5affe54fa4b58617830da48, type: 3}
