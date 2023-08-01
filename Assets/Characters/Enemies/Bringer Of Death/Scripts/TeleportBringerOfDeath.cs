@@ -29,8 +29,7 @@ public class TeleportBringerOfDeath : MonoBehaviour
     {
         if (!isTeleporting)
             return;
-
-        animator.TriggerTeleport();
+            
         StartCoroutine(BackTeleportRoutine());
     }
 

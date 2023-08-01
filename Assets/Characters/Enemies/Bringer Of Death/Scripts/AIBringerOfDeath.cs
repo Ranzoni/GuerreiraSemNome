@@ -4,10 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(MoveBringerOfDeath), typeof(AttackBringerOfDeath), typeof(TeleportBringerOfDeath))]
 public class AIBringerOfDeath : MonoBehaviour
 {
-    [Tooltip("Raio de visão que irá encadiar o ataque corpo-a-corpo ao alvo")]
+    [Tooltip("Raio de visão que irá encadiar a perseguição ao alvo")]
     [SerializeField] float rangeToFollow = 5f;
+    [Tooltip("Raio de visão que irá encadiar o ataque corpo-a-corpo ao alvo")]
+    [SerializeField] float rangeToAttack = 2f;
     [Tooltip("A distância mínima entre o inimigo e o alvo na perseguição")]
-    [SerializeField] float minimumDistance = 2f;
+    [SerializeField] float minimumDistance = .5f;
     [Tooltip("Tempo para destruir o inimigo após dele ser morto")]
     [SerializeField] float delayDestroy = 1f;
     [Tooltip("Quantidade de golpes para encadiar o teleporte")]
@@ -18,6 +20,7 @@ public class AIBringerOfDeath : MonoBehaviour
     [SerializeField] Transform startTransformTeleport;
     [Tooltip("Ponto final para poder se teleportar")]
     [SerializeField] Transform endTransformTeleport;
+    [SerializeField] Transform transformBOD;
 
     GameObject target;
     MoveBringerOfDeath move;
@@ -56,7 +59,7 @@ public class AIBringerOfDeath : MonoBehaviour
             return;
 
         var targetCenterPosition = GetCenterPosition(target.transform);
-        var targetDistance = Vector2.Distance(transform.position, targetCenterPosition);
+        var targetDistance = Vector2.Distance(transformBOD.position, targetCenterPosition);
         move.Flip(targetCenterPosition);
             
         if (targetDistance <= rangeToFollow)
@@ -95,7 +98,6 @@ public class AIBringerOfDeath : MonoBehaviour
             hitsTake = 0;
             StartCoroutine(TeleportRoutine());
         }
-
         
         health.IsInvincible = teleport.IsTeleporting;
     }
@@ -145,13 +147,15 @@ public class AIBringerOfDeath : MonoBehaviour
     Vector2 GetCenterPosition(Transform transform)
     {
         var centerValueX = transform.position.x - (transform.localScale.x / 2);
-        return new Vector2(centerValueX, transform.position.y);
+        return new Vector2(centerValueX, 0);
     }
 
     void ProcessMelee(float targetDistance, Vector2 targetCenterPosition)
     {
-        if (targetDistance > minimumDistance)
+        if (targetDistance > rangeToAttack)
             move.Move(targetCenterPosition);
+        else if (targetDistance < minimumDistance && !teleport.IsTeleporting)
+            StartCoroutine(TeleportRoutine());
         else
             attack.MeleeAttack();
     }
