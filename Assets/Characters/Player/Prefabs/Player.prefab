@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 2544734103105576974}
   - component: {fileID: 7144929060107392349}
   - component: {fileID: 3981630962978026165}
+  - component: {fileID: 1775926562256242771}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpHeight: 12
-  dashSpeed: 6.5
+  dashSpeed: 10
   delayDash: 0.8
 --- !u!114 &4875870032084560489
 MonoBehaviour:
@@ -248,8 +249,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 296627171
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -289,6 +290,18 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &1775926562256242771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017898334302565471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256f3de99e18b604cbab77218a8e66ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &104350845178099732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -722,8 +735,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9161017498562801791, guid: 785ace9296cdb4c489a5656a22f81a94, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 785ace9296cdb4c489a5656a22f81a94, type: 3}
 --- !u!4 &3919270980728431419 stripped
 Transform:

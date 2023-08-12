@@ -4,8 +4,6 @@ public class GroundCollision : MonoBehaviour
 {
     [Tooltip("Pontos de colisão do chão")]
     [SerializeField] Transform[] groundChecks;
-    [Tooltip("Layer de checagem do chão")]
-    [SerializeField] LayerMask groundLayer;
     
     PlayerMove playerMove;
 

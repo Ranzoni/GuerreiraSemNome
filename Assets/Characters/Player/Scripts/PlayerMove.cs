@@ -25,6 +25,7 @@ public class PlayerMove : MonoBehaviour
     ComponentDash componentDash;
     ComponentJump componentJump;
     ComponentFlip componentFlip;
+    bool isFalling;
 
     #region Classes Components Of PlayerMove
 
@@ -218,7 +219,10 @@ public class PlayerMove : MonoBehaviour
             return;
 
         componentRun.PopulateHorizontalMove();
-        componentJump.TriggerJump();
+
+        if (!isFalling)
+            componentJump.TriggerJump();
+
         componentFlip.Execute(transform, componentRun.HorizontalMove);
     }
 
@@ -249,6 +253,7 @@ public class PlayerMove : MonoBehaviour
 
     public void SetFall(bool active)
     {
+        isFalling = active;
         playerAnimation.SetFall(active);
     }
 }
