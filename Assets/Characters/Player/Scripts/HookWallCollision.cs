@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HookWallCollision : MonoBehaviour
@@ -7,16 +5,23 @@ public class HookWallCollision : MonoBehaviour
     [Tooltip("Ponto de colisão na lateral")]
     [SerializeField] Transform hookWallCheck;
 
-    // Start is called before the first frame update
+    PlayerMove playerMove;
+
     void Start()
     {
-        
+        playerMove = GetComponent<PlayerMove>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        var isHookingWall = CheckHookWall();
+
+        if (isHookingWall)
+        {
+            playerMove.StopJump();
+            playerMove.SetGrab(true);
+        }
+
     }
 
     bool CheckHookWall()

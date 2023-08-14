@@ -22,4 +22,9 @@ public class PlayerAnimation : CharacterAnimation
     {
         animator.SetTrigger("dash");
     }
+
+    public void SetGrab(bool active)
+    {
+        animator.SetBool("grabbing", active);
+    }
 }

@@ -26,6 +26,9 @@ public class PlayerMove : MonoBehaviour
     ComponentJump componentJump;
     ComponentFlip componentFlip;
     bool isFalling;
+    bool isGrabbing;
+    float gravityScale;
+    Rigidbody2D rb2D;
 
     #region Classes Components Of PlayerMove
 
@@ -171,12 +174,12 @@ public class PlayerMove : MonoBehaviour
             transform.localScale = localScale;
         }
     }
-
+   
     #endregion Classes Components Of PlayerMove
 
     void Start()
     {
-        var rb2D = GetComponent<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
         playerAttack = GetComponent<PlayerAttack>();
         playerAnimation = GetComponent<PlayerAnimation>();
 
@@ -184,6 +187,8 @@ public class PlayerMove : MonoBehaviour
         componentDash = new ComponentDash(playerAnimation);
         componentJump  = new ComponentJump(rb2D, playerAnimation);
         componentFlip  = new ComponentFlip();
+
+        gravityScale = rb2D.gravityScale;
         
         health = GetComponent<Health>();
 
@@ -218,9 +223,10 @@ public class PlayerMove : MonoBehaviour
         if (componentDash.IsDashing)
             return;
 
-        componentRun.PopulateHorizontalMove();
+        if (!isGrabbing)
+            componentRun.PopulateHorizontalMove();
 
-        if (!isFalling)
+        if (!isFalling || isGrabbing)
             componentJump.TriggerJump();
 
         componentFlip.Execute(transform, componentRun.HorizontalMove);
@@ -239,6 +245,9 @@ public class PlayerMove : MonoBehaviour
             componentRun.Execute(speed);
             
         componentJump.Execute(jumpHeight);
+
+        if (componentJump.IsJumping)
+            SetGrab(false);
     }
 
     public void StopRun()
@@ -255,5 +264,14 @@ public class PlayerMove : MonoBehaviour
     {
         isFalling = active;
         playerAnimation.SetFall(active);
+    }
+
+    public void SetGrab(bool active)
+    {
+        isGrabbing = active;
+        playerAnimation.SetGrab(active);
+        rb2D.gravityScale = active ? 0 : gravityScale;
+        if (active)
+        rb2D.velocity = new Vector2(0, 0);
     }
 }
