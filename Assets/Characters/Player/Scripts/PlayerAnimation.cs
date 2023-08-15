@@ -23,8 +23,22 @@ public class PlayerAnimation : CharacterAnimation
         animator.SetTrigger("dash");
     }
 
-    public void SetGrab(bool active)
+    public void SetLadder(bool active)
     {
-        animator.SetBool("grabbing", active);
+        animator.SetBool("ladder", active);
+    }
+
+    public void PauseAnimation()
+    {
+        if (animator.speed == 0)
+            return;
+            
+        speedAnimation = animator.speed;
+        animator.speed = 0;
+    }
+
+    public void ContinueAnimation()
+    {
+        animator.speed = speedAnimation;
     }
 }

@@ -4,10 +4,12 @@ using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
     protected Animator animator;
+    public float speedAnimation;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        speedAnimation = animator.speed;
     }
 
     public void SetRun(bool active)

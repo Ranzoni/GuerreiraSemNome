@@ -7,7 +7,7 @@ TagManager:
   - Ground
   - Enemy
   - PlayerWeapon
-  - HookWall
+  - Stairs
   layers:
   - Default
   - TransparentFX
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 733043545
+    locked: 0
+  - name: Stairs
+    uniqueID: 4272575599
     locked: 0
   - name: Player
     uniqueID: 296627171
