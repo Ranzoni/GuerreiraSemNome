@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimation), typeof(PlayerMove), typeof(Health))]
 public class PlayerAttack : MonoBehaviour
 {
     [Tooltip("Intervalo (em segundos) para acionar um novo ataque após um ataque padrão")]
@@ -12,10 +11,13 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject weapon;
     [Tooltip("Tempo para liberar o ataque de velocidade (ele é contado enquanto o jogador estiver em movimento)")]
     [SerializeField] float delayForceMotion = 1f;
+    [SerializeField] PlayerAnimation playerAnimation;
+    [SerializeField] PlayerMove move;
+    [SerializeField] Health health;
+    [SerializeField] ControlLadder ladder;
 
-    PlayerAnimation playerAnimation;
-    PlayerMove move;
-    Health health;
+    public bool IsAttacking { get { return isAttacking || isDashingAttack ; } }
+
     bool isAttacking;
     bool isDashingAttack;
     Coroutine checkDashAttackCoroutine;
@@ -23,9 +25,6 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
-        playerAnimation = GetComponent<PlayerAnimation>();
-        move = GetComponent<PlayerMove>();
-        health = GetComponent<Health>();
         DisableWeaponAttack();
     }
 
@@ -39,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
 
         ProcessForceMotion();
 
-        if (move.IsDashing || move.IsJumping)
+        if (move.IsDashing || move.IsJumping || ladder.IsLadding)
             return;
 
         if (isDashingAttack)
@@ -48,7 +47,7 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
-        if (!Input.GetButtonDown("Fire1") || isAttacking || move.IsJumping)
+        if (!Input.GetButtonDown("Fire1") || isAttacking)
             return;
         
         StartCoroutine(Attack());
@@ -96,11 +95,6 @@ public class PlayerAttack : MonoBehaviour
 
         isDashingAttack = false;
         isAttacking = false;
-    }
-    
-    public bool IsAttacking()
-    {
-        return isAttacking || isDashingAttack;
     }
 
     public void EnableWeaponAttack()

@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - PlayerWeapon
   - Stairs
+  - StartStair
+  - EndStair
   layers:
   - Default
   - TransparentFX

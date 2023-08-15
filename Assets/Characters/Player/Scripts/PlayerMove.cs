@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimation), typeof(PlayerAttack), typeof(Health))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMove : MonoBehaviour
 {
     [Tooltip("Velocidade do movimento")]
@@ -12,20 +12,21 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float dashSpeed = 8f;
     [Tooltip("Tempo da duração da esquiva")]
     [SerializeField] float delayDash = .5f;
+    [SerializeField] PlayerAnimation playerAnimation;
+    [SerializeField] PlayerAttack playerAttack;
+    [SerializeField] Health health;
+    [SerializeField] ControlLadder ladder;
+    [SerializeField] GroundCollision groundCollision;
 
     public bool IsMoving { get { return componentRun.HorizontalMove != 0; } }
     public bool IsDashing { get { return componentDash.IsDashing; } }
     public bool IsJumping { get { return componentJump.IsJumping; } }
     public bool IsFlipped { get { return componentFlip.IsFlipped; } }
     
-    PlayerAnimation playerAnimation;
-    PlayerAttack playerAttack;
-    Health health;
     ComponentRun componentRun;
     ComponentDash componentDash;
     ComponentJump componentJump;
     ComponentFlip componentFlip;
-    bool isFalling;
 
     #region Classes Components Of PlayerMove
 
@@ -47,7 +48,7 @@ public class PlayerMove : MonoBehaviour
 
         public void PopulateHorizontalMove()
         {
-            if (playerAttack.IsAttacking())
+            if (playerAttack.IsAttacking)
                 horizontalMove = 0;
             else
                 horizontalMove = ReturnIntHorizontalAxis();
@@ -177,15 +178,11 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         var rb2D = GetComponent<Rigidbody2D>();
-        playerAttack = GetComponent<PlayerAttack>();
-        playerAnimation = GetComponent<PlayerAnimation>();
 
         componentRun = new ComponentRun(rb2D, playerAttack, playerAnimation);
         componentDash = new ComponentDash(playerAnimation);
         componentJump  = new ComponentJump(rb2D, playerAnimation);
         componentFlip  = new ComponentFlip();
-
-        health = GetComponent<Health>();
 
         StartCoroutine(DashRoutine());
     }
@@ -194,7 +191,7 @@ public class PlayerMove : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetButton("Fire2") && IsMoving && !IsDashing)
+            if (Input.GetButton("Fire2") && IsMoving && !IsDashing && !ladder.IsLadding)
             {
                 componentDash.Execute(componentRun.HorizontalMove);
 
@@ -218,9 +215,10 @@ public class PlayerMove : MonoBehaviour
         if (componentDash.IsDashing)
             return;
 
-        componentRun.PopulateHorizontalMove();
+        if (!ladder.IsLadding)
+            componentRun.PopulateHorizontalMove();
 
-        if (!isFalling)
+        if (!groundCollision.IsFalling || ladder.IsLadding)
             componentJump.TriggerJump();
 
         componentFlip.Execute(transform, componentRun.HorizontalMove);
@@ -228,15 +226,18 @@ public class PlayerMove : MonoBehaviour
 
     bool PlayerHasToStop()
     {
-        return playerAttack.IsAttacking() || health.IsHurting || health.IsDead();
+        return playerAttack.IsAttacking || health.IsHurting || health.IsDead();
     }
 
     void FixedUpdate()
     {
-        if (componentDash.IsDashing)
-            componentRun.ExecuteDash(dashSpeed * componentDash.HorizontalMove);
-        else
-            componentRun.Execute(speed);
+        if (!ladder.IsLadding)
+        {
+            if (componentDash.IsDashing)
+                componentRun.ExecuteDash(dashSpeed * componentDash.HorizontalMove);
+            else
+                componentRun.Execute(speed);
+        }
             
         componentJump.Execute(jumpHeight);
     }
@@ -249,11 +250,5 @@ public class PlayerMove : MonoBehaviour
     public void StopJump()
     {
         componentJump.Stop();
-    }
-
-    public void SetFall(bool active)
-    {
-        isFalling = active;
-        playerAnimation.SetFall(active);
     }
 }

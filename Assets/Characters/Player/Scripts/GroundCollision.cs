@@ -4,22 +4,31 @@ public class GroundCollision : MonoBehaviour
 {
     [Tooltip("Pontos de colisão do chão")]
     [SerializeField] Transform[] groundChecks;
-    
-    PlayerMove playerMove;
+    [SerializeField] PlayerMove playerMove;
+    [SerializeField] PlayerAnimation playerAnimation;
+    [SerializeField] ControlLadder controlLadder;
 
-    void Start()
-    {
-        playerMove = GetComponent<PlayerMove>();
-    }    
+    public bool IsFalling { get { return isFalling; } }
+
+    bool isFalling;
 
     private void FixedUpdate()
     {
+        if (controlLadder.IsLadding)
+            return;
+
         var isGrounded = CheckGrounded();
 
         if (isGrounded)
             playerMove.StopJump();
 
-        playerMove.SetFall(!isGrounded);
+        Fall(!isGrounded);
+    }
+
+    void Fall(bool active)
+    {
+        playerAnimation.SetFall(active);
+        isFalling = active;
     }
 
     bool CheckGrounded()

@@ -1,105 +1,108 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimation), typeof(PlayerMove), typeof(PlayerAttack))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class ControlLadder : MonoBehaviour
 {
     [SerializeField] float speed = 2f;
-    [Tooltip("Pontos de colisão")]
-    [SerializeField] Transform[] stairChecks;
+    [SerializeField] PlayerAnimation playerAnimation;
+    [SerializeField] PlayerMove playerMove;
+    [SerializeField] PlayerAttack playerAttack;
+    [SerializeField] GroundCollision groundCollision;
 
     public bool IsLadding { get { return isLadding; } }
 
     GameObject stairs;
-    PlayerAnimation playerAnimation;
     bool isLadding;
     Rigidbody2D rb2D;
-    PlayerMove playerMove;
-    PlayerAttack playerAttack;
+    float gravityScale;
+    bool startStair;
+    bool endStair;
 
     void Start()
     {
-        playerAnimation = GetComponent<PlayerAnimation>();
-        playerMove = GetComponent<PlayerMove>();
-        playerAttack = GetComponent<PlayerAttack>();
         rb2D = GetComponent<Rigidbody2D>();
+        gravityScale = rb2D.gravityScale;
     }
 
     void Update()
     {
-        return;
-        
-        if (stairs is null || Input.GetButtonDown("Jump") || playerMove.IsMoving)
+        if (!(playerMove.IsMoving || playerAttack.IsAttacking) || groundCollision.IsFalling)
         {
-            StopLandding();
-            return;
+            if (stairs is null || Input.GetButtonDown("Jump"))
+            {
+                StopLadding();
+                return;
+            }
+
+            if (Input.GetAxisRaw("Vertical") == 0)
+            {
+                if (isLadding)
+                    playerAnimation.PauseAnimation();
+
+                return;
+            }
+
+            StartLadding();
         }
-
-        if (Input.GetAxisRaw("Vertical") == 0)
-        {
-            if (isLadding)
-                playerAnimation.PauseAnimation();
-
-            return;
-        }
-
-        StartLandding();
     }
 
-    void StartLandding()
-    {
-        if (!isLadding)
-        {
-            isLadding = true;
-            playerAnimation.SetLadder(true);
-            rb2D.bodyType = RigidbodyType2D.Kinematic;
-        }
-
-        playerAnimation.ContinueAnimation();
-        var position = Input.GetAxisRaw("Vertical") < 0 ? Vector2.down : Vector2.up;
-        transform.Translate(position * speed * Time.deltaTime);
-    }
-
-    void StopLandding()
+    public void StopLadding()
     {
         if (!isLadding)
             return;
 
+        rb2D.gravityScale = gravityScale;
         playerAnimation.ContinueAnimation();
         isLadding = false;
         playerAnimation.SetLadder(false);
         rb2D.bodyType = RigidbodyType2D.Dynamic;
     }
 
-    // void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.gameObject.CompareTag("Stairs"))
-    //         stairs = other.gameObject;
-    // }
-
-    // void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (stairs == other.gameObject)
-    //         stairs = null;
-    // }
-
-    void FixedUpdate()
+    void StartLadding()
     {
-        CheckStairs();
+        if (!FinishedStairs())
+        {
+            StopLadding();
+            return;
+        }
+
+        if (!isLadding)
+        {
+            isLadding = true;
+            playerAnimation.SetLadder(true);
+            rb2D.gravityScale = 0;
+            rb2D.bodyType = RigidbodyType2D.Kinematic;
+        }
+
+        rb2D.velocity = new Vector2(0, 0);
+        playerAnimation.ContinueAnimation();
+        var position = Input.GetAxisRaw("Vertical") < 0 ? Vector2.down : Vector2.up;
+        transform.Translate(position * speed * Time.deltaTime);
     }
 
-    void CheckStairs()
+    bool FinishedStairs()
     {
-        foreach (Transform stairCheck in stairChecks)
-        {
-            var point = transform.localScale.x < 1 ? Vector2.left : Vector2.right;
-            var hit = Physics2D.Raycast(stairCheck.position, point, .75f);
-            if (hit.collider != null && hit.collider.gameObject.CompareTag("Stairs"))
-            {
-                stairs = hit.collider.gameObject;
-                return;
-            }
+        if (Input.GetAxisRaw("Vertical") > 0 && endStair)
+            return false;
 
+        if (Input.GetAxisRaw("Vertical") < 0 && startStair)
+            return false;
+
+        return true;
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Stairs") && stairs is null)
+            stairs = other.gameObject;
+
+        startStair = other.gameObject.CompareTag("StartStair");
+        endStair = other.gameObject.CompareTag("EndStair");
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (stairs is not null && stairs.Equals(other.gameObject))
             stairs = null;
-        }
     }
 }
