@@ -52,4 +52,10 @@ public class BanditAI : MonoBehaviour
         var centerValueX = transform.position.x - (transform.localScale.x / 2);
         return new Vector2(centerValueX, transform.position.y);
     }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, rangeFollow);
+    }
 }
