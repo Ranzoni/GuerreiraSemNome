@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Canvas))]
 public class GameOver : MonoBehaviour
@@ -8,14 +9,15 @@ public class GameOver : MonoBehaviour
     [SerializeField] float gameOverDelay = 1f;
     [Tooltip("Prefab com o script para controle de sessão do jogo")]
     [SerializeField] ControlSection section;
+    [SerializeField] UnityEvent gameFinished;
 
-    Canvas gameOver;
+    Canvas gameOverCanvas;
     FirstButtonController buttonController;
 
     void Start()
     {
-        gameOver = GetComponent<Canvas>();
-        gameOver.enabled = false;
+        gameOverCanvas = GetComponent<Canvas>();
+        gameOverCanvas.enabled = false;
 
         buttonController = FindFirstObjectByType<FirstButtonController>();
     }    
@@ -27,10 +29,17 @@ public class GameOver : MonoBehaviour
 
     IEnumerator GameOverRoutine()
     {
+        gameFinished.Invoke();
+
         yield return new WaitForSeconds(gameOverDelay);
 
-        section.EndGame();
+        section.LockScreen();
         buttonController.SelectGameOverButton();
-        gameOver.enabled = true;
+        gameOverCanvas.enabled = true;
+    }
+
+    public void ResumeGame()
+    {
+        section.StartGame();
     }
 }

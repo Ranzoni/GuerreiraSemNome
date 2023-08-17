@@ -465,9 +465,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ControlSection, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 2268732601280291332}
+        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+        m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -596,6 +596,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverDelay: 2
   section: {fileID: 0}
+  gameFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6523707065344622509
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,19 +22,24 @@ public class Pause : MonoBehaviour
 
     void Update()
     {
-        if (!Input.GetButtonDown("Cancel") || section.GameFinished)
+        if (!Input.GetButtonDown("Cancel"))
             return;
 
-        if (section.GamePaused)
+        if (IsPaused())
             ResumeGame();
         else
             PauseGame();
     }
 
+    bool IsPaused()
+    {
+        return pauseCanvas.enabled;
+    }
+
     public void ResumeGame()
     {
         pauseCanvas.enabled = false;
-        section.ContinueGame();
+        section.UnlockScreen();
         gameResumed.Invoke();
     }
 
@@ -42,7 +47,7 @@ public class Pause : MonoBehaviour
     {
         buttonController.SelectPauseButton();
         pauseCanvas.enabled = true;
-        section.PauseGame();
+        section.LockScreen();
         gamePaused.Invoke();
     }
 }
