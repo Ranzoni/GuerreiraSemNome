@@ -3,8 +3,15 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [SerializeField] CheckpointManager manager;
+    [SerializeField] GameObject flagActivated;
+    [SerializeField] GameObject flagNotActivated;
 
     bool activated;
+
+    void Start()
+    {
+        flagActivated.SetActive(false);
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,6 +19,8 @@ public class Checkpoint : MonoBehaviour
             return;
 
         activated = true;
+        flagActivated.SetActive(true);
+        flagNotActivated.SetActive(false);
         manager.SetPosition(other.gameObject.transform.position);
     }
 }
