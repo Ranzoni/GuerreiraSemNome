@@ -10,6 +10,7 @@ TagManager:
   - Stairs
   - StartStair
   - EndStair
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

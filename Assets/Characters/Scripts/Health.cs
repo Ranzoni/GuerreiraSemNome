@@ -77,4 +77,10 @@ public class Health : MonoBehaviour
     {
         health = maxHealth;
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (CompareTag("Player") && other.gameObject.CompareTag("Checkpoint"))
+            Restore();
+    }
 }
