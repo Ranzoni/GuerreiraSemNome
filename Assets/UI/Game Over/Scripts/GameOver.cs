@@ -1,4 +1,5 @@
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,16 +11,17 @@ public class GameOver : MonoBehaviour
     [Tooltip("Prefab com o script para controle de sessão do jogo")]
     [SerializeField] ControlSection section;
     [SerializeField] UnityEvent gameFinished;
+    [SerializeField] UnityEvent gameResumed;
 
-    Canvas gameOverCanvas;
     FirstButtonController buttonController;
+    CheckpointManager checkpointManager;
 
     void Start()
     {
-        gameOverCanvas = GetComponent<Canvas>();
-        gameOverCanvas.enabled = false;
+        SetUIActive(false);
 
         buttonController = FindFirstObjectByType<FirstButtonController>();
+        checkpointManager = FindFirstObjectByType<CheckpointManager>();
     }    
 
     public void ExecuteGameOver()
@@ -33,13 +35,27 @@ public class GameOver : MonoBehaviour
 
         yield return new WaitForSeconds(gameOverDelay);
 
-        section.LockScreen();
         buttonController.SelectGameOverButton();
-        gameOverCanvas.enabled = true;
+        SetUIActive(true);
+        section.LockScreen();
     }
 
     public void ResumeGame()
     {
-        section.StartGame();
+        if (checkpointManager is not null && checkpointManager.HasCheckpoint)
+        {
+            checkpointManager.RestoreToCheckpoint();
+            SetUIActive(false);
+            gameResumed.Invoke();
+            section.UnlockScreen();
+        }
+        else
+            section.StartGame();
+    }
+
+    void SetUIActive(bool active)
+    {
+        for (var i = 0; i < transform.childCount; i++)
+            transform.GetChild(i).gameObject.SetActive(active);
     }
 }

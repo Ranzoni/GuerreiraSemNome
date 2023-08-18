@@ -72,4 +72,9 @@ public class Health : MonoBehaviour
     {
         return health <= 0;
     }
+
+    public void Restore()
+    {
+        health = maxHealth;
+    }
 }

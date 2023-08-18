@@ -12,8 +12,13 @@ public class DeadLine : MonoBehaviour
 
         gameOver.ExecuteGameOver();
 
-        var cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-        if (cinemachineVirtualCamera is not null)
-            FindObjectOfType<CinemachineVirtualCamera>().enabled = false;
+        InactivePlayer(other.gameObject);
+    }
+
+    void InactivePlayer(GameObject player)
+    {
+        var playerStatusManager = player.GetComponent<PlayerStatusManager>();
+        if (playerStatusManager is not null)
+            playerStatusManager.Inative();
     }
 }

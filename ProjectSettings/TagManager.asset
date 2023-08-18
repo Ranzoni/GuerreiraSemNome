@@ -56,6 +56,9 @@ TagManager:
   - name: Enemy
     uniqueID: 2199607223
     locked: 0
+  - name: Checkpoint
+    uniqueID: 3481189959
+    locked: 0
   - name: Player
     uniqueID: 296627171
     locked: 0
