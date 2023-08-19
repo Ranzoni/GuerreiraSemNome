@@ -21,6 +21,8 @@ public class Checkpoint : MonoBehaviour
         activated = true;
         flagActivated.SetActive(true);
         flagNotActivated.SetActive(false);
-        manager.SetPosition(other.gameObject.transform.position);
+
+        var currentPlayerPosition = other.gameObject.transform.position;
+        manager.Save(currentPlayerPosition);
     }
 }
