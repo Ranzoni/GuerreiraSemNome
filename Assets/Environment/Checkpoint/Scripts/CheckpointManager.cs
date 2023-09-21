@@ -3,6 +3,8 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
     [SerializeField] PlayerStatusManager playerStatusManager;
+    [SerializeField] Transform boss;
+    [SerializeField] Transform startBossFight;
 
     public bool HasCheckpoint { get { return positionSaved is not null; } }
 
@@ -25,5 +27,7 @@ public class CheckpointManager : MonoBehaviour
 
         var positionToRespawn = (Vector2)positionSaved;
         playerStatusManager.ResetStatus(positionToRespawn);
+        boss.gameObject.SetActive(false);
+        startBossFight.gameObject.SetActive(false);
     }
 }
