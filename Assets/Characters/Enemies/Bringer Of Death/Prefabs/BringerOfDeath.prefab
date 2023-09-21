@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307770700b5d929489625b7023dd913c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedAnimation: 0
 --- !u!95 &2544734103105576974
 Animator:
   serializedVersion: 5
@@ -260,8 +261,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2095360073
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -750047184722822154, guid: 1914d95466e3d4341a618c35a56d5f82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -324,6 +325,10 @@ PrefabInstance:
     - target: {fileID: 1585118404230608592, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968083151477640043, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4878189488694528776, guid: 9c43c7184749e3a47adc5169b54073a5, type: 3}
       propertyPath: m_Name

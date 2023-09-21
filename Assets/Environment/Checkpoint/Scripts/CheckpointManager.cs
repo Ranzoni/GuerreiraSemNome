@@ -3,7 +3,6 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
     [SerializeField] PlayerStatusManager playerStatusManager;
-    [SerializeField] EnemiesPoolControl enemiesPoolControl;
 
     public bool HasCheckpoint { get { return positionSaved is not null; } }
 
@@ -26,6 +25,5 @@ public class CheckpointManager : MonoBehaviour
 
         var positionToRespawn = (Vector2)positionSaved;
         playerStatusManager.ResetStatus(positionToRespawn);
-        enemiesPoolControl.SetPool();
     }
 }
