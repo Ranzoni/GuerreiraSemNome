@@ -11,18 +11,33 @@ public class GroundCollision : MonoBehaviour
     public bool IsFalling { get { return isFalling; } }
 
     bool isFalling;
+    bool isGrounded;
+    bool lastStatus;
 
-    private void FixedUpdate()
+    void Start()
     {
+        lastStatus = !isGrounded;
+    }
+
+    void Update()
+    {
+        isGrounded = CheckGrounded();
+    }
+
+    void FixedUpdate()
+    {
+        if (isGrounded == lastStatus)
+            return;
+
         if (controlLadder.IsLadding)
             return;
 
-        var isGrounded = CheckGrounded();
-
-        if (isGrounded)
+        if (isGrounded && playerMove.IsJumping)
             playerMove.StopJump();
 
         Fall(!isGrounded);
+
+        lastStatus = isGrounded;
     }
 
     void Fall(bool active)
