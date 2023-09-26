@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 1417534958970199628}
   - component: {fileID: 5449983659989571764}
   - component: {fileID: 8289858988682207876}
+  - component: {fileID: 6880257567696260699}
   - component: {fileID: 2544734103105576974}
   - component: {fileID: 2408721159455294892}
   m_Layer: 6
@@ -202,6 +203,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedAnimation: 0
+--- !u!114 &6880257567696260699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017898334302565471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e5787d12fcabf842a10f48b020c502f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabAttackSFX: {fileID: 5128187455274512119, guid: 8e4ca0f0e4f2f2043be1f9404622619e, type: 3}
+  prefabSpellSFX: {fileID: 5128187455274512119, guid: a6400fea4fbaf6148b1e1da777f6bf0f, type: 3}
+  prefabHurtSFX: {fileID: 5128187455274512119, guid: e3da8bdc85991804289d2b267a4c4d7e, type: 3}
+  prefabDeathSFX: {fileID: 5128187455274512119, guid: 90272d507a817ce4e81ac0409bc37f66, type: 3}
 --- !u!95 &2544734103105576974
 Animator:
   serializedVersion: 5

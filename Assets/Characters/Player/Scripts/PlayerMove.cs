@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] Health health;
     [SerializeField] ControlLadder ladder;
     [SerializeField] GroundCollision groundCollision;
+    [SerializeField] PlayerSFXController sfx;
 
     public bool IsMoving { get { return componentRun.HorizontalMove != 0; } }
     public bool IsDashing { get { return componentDash.IsDashing; } }
@@ -93,10 +94,12 @@ public class PlayerMove : MonoBehaviour
         bool isDashing;
         float horizontalMove;
         readonly PlayerAnimation playerAnimation;
+        PlayerSFXController sfx;
 
-        public ComponentDash(PlayerAnimation playerAnimation)
+        public ComponentDash(PlayerAnimation playerAnimation, PlayerSFXController sfx)
         {
             this.playerAnimation = playerAnimation;
+            this.sfx = sfx;
         }
 
         public void Execute(float horizontalMove)
@@ -104,6 +107,7 @@ public class PlayerMove : MonoBehaviour
             this.horizontalMove = horizontalMove;
             isDashing = true;
             playerAnimation.TriggerDash();
+            sfx.PlayDashSFX();
         }
 
         public void Stop()
@@ -120,11 +124,13 @@ public class PlayerMove : MonoBehaviour
         bool isJumping;
         Rigidbody2D rb2D;
         readonly PlayerAnimation playerAnimation;
+        PlayerSFXController sfx;
 
-        public ComponentJump(Rigidbody2D rb2D, PlayerAnimation playerAnimation)
+        public ComponentJump(Rigidbody2D rb2D, PlayerAnimation playerAnimation, PlayerSFXController sfx)
         {
             this.playerAnimation = playerAnimation;
             this.rb2D = rb2D;
+            this.sfx = sfx;
         }
 
         public void TriggerJump()
@@ -143,6 +149,8 @@ public class PlayerMove : MonoBehaviour
             jumpTriggered = false;
             
             rb2D.velocity = Vector2.up * jumpHeight;
+
+            sfx.PlayJumpSFX();
         }
 
         public void Stop()
@@ -180,8 +188,8 @@ public class PlayerMove : MonoBehaviour
         var rb2D = GetComponent<Rigidbody2D>();
 
         componentRun = new ComponentRun(rb2D, playerAttack, playerAnimation);
-        componentDash = new ComponentDash(playerAnimation);
-        componentJump  = new ComponentJump(rb2D, playerAnimation);
+        componentDash = new ComponentDash(playerAnimation, sfx);
+        componentJump  = new ComponentJump(rb2D, playerAnimation, sfx);
         componentFlip  = new ComponentFlip();
 
         StartCoroutine(DashRoutine());

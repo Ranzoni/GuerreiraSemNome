@@ -51,6 +51,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   flagActivated: {fileID: 3805089037828666730}
   flagNotActivated: {fileID: 3125696618212499749}
+  prefabSFX: {fileID: 5128187455274512119, guid: 5205d265f2eea1a42ac1941533caa929, type: 3}
 --- !u!61 &8547298240131254987
 BoxCollider2D:
   m_ObjectHideFlags: 0
