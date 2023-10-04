@@ -23,7 +23,7 @@ public class PlayerAnimation : CharacterAnimation
         animator.SetTrigger("dash");
     }
 
-    public void SetLadder(bool active)
+    public void SetMoveOnStair(bool active)
     {
         animator.SetBool("ladder", active);
     }

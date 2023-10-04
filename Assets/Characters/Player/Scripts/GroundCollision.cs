@@ -1,22 +1,24 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerManager), typeof(PlayerAnimation))]
 public class GroundCollision : MonoBehaviour
 {
     [Tooltip("Pontos de colisão do chão")]
     [SerializeField] Transform[] groundChecks;
-    [SerializeField] PlayerMove playerMove;
-    [SerializeField] PlayerAnimation playerAnimation;
-    [SerializeField] ControlLadder controlLadder;
 
     public bool IsFalling { get { return isFalling; } }
 
     bool isFalling;
     bool isGrounded;
     bool lastStatus;
+    PlayerManager manager;
+    PlayerAnimation playerAnimation;
 
     void Start()
     {
         lastStatus = !isGrounded;
+        manager = GetComponent<PlayerManager>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     void Update()
@@ -29,11 +31,11 @@ public class GroundCollision : MonoBehaviour
         if (isGrounded == lastStatus)
             return;
 
-        if (controlLadder.IsLadding)
+        if (manager.IsOnStairs)
             return;
 
-        if (isGrounded && playerMove.IsJumping)
-            playerMove.StopJump();
+        if (isGrounded && manager.IsJumping)
+            manager.StopJump();
 
         Fall(!isGrounded);
 

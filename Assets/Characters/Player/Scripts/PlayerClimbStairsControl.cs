@@ -1,75 +1,75 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class ControlLadder : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerManager), typeof(PlayerAnimation))]
+public class PlayerClimbStairsControl : MonoBehaviour
 {
     [SerializeField] float speed = 2f;
-    [SerializeField] PlayerAnimation playerAnimation;
-    [SerializeField] PlayerMove playerMove;
-    [SerializeField] PlayerAttack playerAttack;
-    [SerializeField] GroundCollision groundCollision;
 
-    public bool IsLadding { get { return isLadding; } }
+    public bool IsTheStairs { get { return isOnTheStair; } }
 
     GameObject stairs;
-    bool isLadding;
+    bool isOnTheStair;
     Rigidbody2D rb2D;
     float gravityScale;
     bool startStair;
     bool endStair;
+    PlayerManager manager;
+    PlayerAnimation playerAnimation;
 
     void Start()
     {
+        manager = GetComponent<PlayerManager>();
+        playerAnimation = GetComponent<PlayerAnimation>();
         rb2D = GetComponent<Rigidbody2D>();
         gravityScale = rb2D.gravityScale;
     }
 
     void Update()
     {
-        if (!(playerMove.IsMoving || playerAttack.IsAttacking) || groundCollision.IsFalling)
+        if (!manager.CanGoStairs())
+            return;
+
+        if (stairs is null || Input.GetButtonDown("Jump"))
         {
-            if (stairs is null || Input.GetButtonDown("Jump"))
-            {
-                StopLadding();
-                return;
-            }
-
-            if (Input.GetAxisRaw("Vertical") == 0)
-            {
-                if (isLadding)
-                    playerAnimation.PauseAnimation();
-
-                return;
-            }
-
-            StartLadding();
+            GetOutStair();
+            return;
         }
+
+        if (Input.GetAxisRaw("Vertical") == 0)
+        {
+            if (isOnTheStair)
+                playerAnimation.PauseAnimation();
+
+            return;
+        }
+
+        GoOnStair();
     }
 
-    public void StopLadding()
+    void GetOutStair()
     {
-        if (!isLadding)
+        if (!isOnTheStair)
             return;
 
         rb2D.gravityScale = gravityScale;
         playerAnimation.ContinueAnimation();
-        isLadding = false;
-        playerAnimation.SetLadder(false);
+        isOnTheStair = false;
+        playerAnimation.SetMoveOnStair(false);
         rb2D.bodyType = RigidbodyType2D.Dynamic;
     }
 
-    void StartLadding()
+    void GoOnStair()
     {
         if (!FinishedStairs())
         {
-            StopLadding();
+            GetOutStair();
             return;
         }
 
-        if (!isLadding)
+        if (!isOnTheStair)
         {
-            isLadding = true;
-            playerAnimation.SetLadder(true);
+            isOnTheStair = true;
+            playerAnimation.SetMoveOnStair(true);
             rb2D.gravityScale = 0;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
         }

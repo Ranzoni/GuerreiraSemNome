@@ -151,12 +151,6 @@ MonoBehaviour:
   jumpHeight: 12
   dashSpeed: 10
   delayDash: 0.8
-  playerAnimation: {fileID: 4875870032084560489}
-  playerAttack: {fileID: 587217418050061116}
-  health: {fileID: 397046612734854412}
-  ladder: {fileID: 2531737441332804956}
-  groundCollision: {fileID: 3981630962978026165}
-  sfx: {fileID: 7138241218988496597}
 --- !u!114 &4875870032084560489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0969ad1fb0c3145bafed9a1be2ef02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAnimation: 0
 --- !u!114 &587217418050061116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +179,6 @@ MonoBehaviour:
   dashSpeed: 4
   weapon: {fileID: 4355789932094024771}
   delayForceMotion: 1
-  playerAnimation: {fileID: 4875870032084560489}
 --- !u!114 &397046612734854412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,10 +206,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  playerAnimation: {fileID: 4875870032084560489}
-  playerMove: {fileID: 1649716359331668207}
-  playerAttack: {fileID: 587217418050061116}
-  groundCollision: {fileID: 3981630962978026165}
 --- !u!114 &3981630962978026165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,9 +230,6 @@ MonoBehaviour:
   - {fileID: 3342136722216919700}
   - {fileID: 1209553438456805048}
   - {fileID: 6677116049765791201}
-  playerMove: {fileID: 1649716359331668207}
-  playerAnimation: {fileID: 4875870032084560489}
-  controlLadder: {fileID: 2531737441332804956}
 --- !u!114 &548148816612606622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,8 +273,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {fileID: 1649716359331668207}
+  attack: {fileID: 587217418050061116}
   health: {fileID: 397046612734854412}
-  ladder: {fileID: 2531737441332804956}
+  climbStairsControl: {fileID: 2531737441332804956}
   groundCollision: {fileID: 3981630962978026165}
 --- !u!95 &2544734103105576974
 Animator:

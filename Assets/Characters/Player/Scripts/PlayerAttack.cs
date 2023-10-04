@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (manager.BreakAttack())
+        if (manager.HaveToStopAttack())
         {
             DisableWeaponAttack();
             return;
@@ -56,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
 
     void ProcessForceMotion()
     {
-        if (!manager.IsMoving() && checkDashAttackCoroutine is not null)
+        if (!manager.IsMoving && checkDashAttackCoroutine is not null)
         {
             dashAttackReadyToUse = false;
             StopCoroutine(checkDashAttackCoroutine);
@@ -75,7 +75,7 @@ public class PlayerAttack : MonoBehaviour
 
     void DashAttack()
     {
-        var direction = manager.IsFlipped() ? Vector2.left : Vector2.right;
+        var direction = manager.IsFlipped ? Vector2.left : Vector2.right;
         var nextPosition = direction * dashSpeed * Time.deltaTime;
         transform.Translate(nextPosition);
     }

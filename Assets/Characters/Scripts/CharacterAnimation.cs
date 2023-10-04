@@ -4,7 +4,7 @@ using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
     protected Animator animator;
-    public float speedAnimation;
+    protected float speedAnimation;
 
     void Start()
     {
