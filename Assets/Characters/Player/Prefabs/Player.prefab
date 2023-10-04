@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 3981630962978026165}
   - component: {fileID: 548148816612606622}
   - component: {fileID: 7138241218988496597}
+  - component: {fileID: 1651365529925112676}
   - component: {fileID: 2544734103105576974}
   - component: {fileID: 7144929060107392349}
   m_Layer: 3
@@ -186,9 +187,6 @@ MonoBehaviour:
   weapon: {fileID: 4355789932094024771}
   delayForceMotion: 1
   playerAnimation: {fileID: 4875870032084560489}
-  move: {fileID: 1649716359331668207}
-  health: {fileID: 397046612734854412}
-  ladder: {fileID: 2531737441332804956}
 --- !u!114 &397046612734854412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +275,22 @@ MonoBehaviour:
   prefabAttackSFX: {fileID: 5128187455274512119, guid: d3d3f2b5c30c5814cb26ac823638b4fd, type: 3}
   prefabHurtSFX: {fileID: 5128187455274512119, guid: e3da8bdc85991804289d2b267a4c4d7e, type: 3}
   prefabDeathSFX: {fileID: 5128187455274512119, guid: 091c8e3f7aed3f742a79828c6c1fd907, type: 3}
+--- !u!114 &1651365529925112676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017898334302565471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a941f817591d9249be6320f26f2c7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: {fileID: 1649716359331668207}
+  health: {fileID: 397046612734854412}
+  ladder: {fileID: 2531737441332804956}
+  groundCollision: {fileID: 3981630962978026165}
 --- !u!95 &2544734103105576974
 Animator:
   serializedVersion: 5

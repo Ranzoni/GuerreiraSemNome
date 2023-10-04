@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerManager), typeof(PlayerAnimation))]
 public class PlayerAttack : MonoBehaviour
 {
     [Tooltip("Intervalo (em segundos) para acionar um novo ataque após um ataque padrão")]
@@ -11,10 +12,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject weapon;
     [Tooltip("Tempo para liberar o ataque de velocidade (ele é contado enquanto o jogador estiver em movimento)")]
     [SerializeField] float delayForceMotion = 1f;
-    [SerializeField] PlayerAnimation playerAnimation;
-    [SerializeField] PlayerMove move;
-    [SerializeField] Health health;
-    [SerializeField] ControlLadder ladder;
 
     public bool IsAttacking { get { return isAttacking || isDashingAttack ; } }
 
@@ -22,15 +19,19 @@ public class PlayerAttack : MonoBehaviour
     bool isDashingAttack;
     Coroutine checkDashAttackCoroutine;
     bool dashAttackReadyToUse;
+    PlayerManager manager;
+    PlayerAnimation playerAnimation;
 
     void Start()
     {
         DisableWeaponAttack();
+        manager = GetComponent<PlayerManager>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     void Update()
     {
-        if (health.IsHurting || health.IsDead())
+        if (manager.BreakAttack())
         {
             DisableWeaponAttack();
             return;
@@ -38,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
 
         ProcessForceMotion();
 
-        if (move.IsDashing || move.IsJumping || ladder.IsLadding)
+        if (!manager.CanAttack())
             return;
 
         if (isDashingAttack)
@@ -55,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
 
     void ProcessForceMotion()
     {
-        if (!move.IsMoving && checkDashAttackCoroutine is not null)
+        if (!manager.IsMoving() && checkDashAttackCoroutine is not null)
         {
             dashAttackReadyToUse = false;
             StopCoroutine(checkDashAttackCoroutine);
@@ -74,7 +75,7 @@ public class PlayerAttack : MonoBehaviour
 
     void DashAttack()
     {
-        var direction = move.IsFlipped ? Vector2.left : Vector2.right;
+        var direction = manager.IsFlipped() ? Vector2.left : Vector2.right;
         var nextPosition = direction * dashSpeed * Time.deltaTime;
         transform.Translate(nextPosition);
     }
@@ -82,7 +83,7 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
-        move.StopRun();
+        manager.StopRun();
         if (dashAttackReadyToUse)
         {
             playerAnimation.TriggerDashAttack();
