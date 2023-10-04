@@ -83,6 +83,7 @@ public class PlayerMove : MonoBehaviour
         public void Stop()
         {
             horizontalMove = 0;
+            rb2D.velocity = new Vector3(0, 0, 0);
         }
     }
 
@@ -199,7 +200,7 @@ public class PlayerMove : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetButton("Fire2") && IsMoving && !IsDashing && !ladder.IsLadding)
+            if (Input.GetButton("Fire2") && IsMoving && !IsDashing && !ladder.IsLadding && !PlayerHasToStop())
             {
                 componentDash.Execute(componentRun.HorizontalMove);
 
