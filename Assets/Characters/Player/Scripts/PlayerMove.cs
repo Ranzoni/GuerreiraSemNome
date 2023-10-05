@@ -207,7 +207,7 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        if (componentDash.IsDashing)
+        if (componentDash.IsDashing || manager.IsDashingAttack)
             return;
 
         if (manager.CanMove())

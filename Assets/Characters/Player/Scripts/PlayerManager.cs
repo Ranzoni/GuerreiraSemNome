@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     public bool IsFlipped { get { return move.IsFlipped; } }
     public bool IsJumping { get { return move.IsJumping; } }
     public bool IsOnStairs { get { return climbStairsControl.IsTheStairs; } }
+    public bool IsDashingAttack { get { return attack.IsDashingAttack; } }
 
     public void StopRun()
     {
@@ -43,6 +44,9 @@ public class PlayerManager : MonoBehaviour
 
     public bool CanDash()
     {
+        if (attack.IsAttacking || attack.IsDashingAttack || health.IsHurting || health.IsDead())
+            return false;
+
         return move.IsMoving && !move.IsDashing && !HaveToStopMovement();
     }
 
@@ -58,6 +62,6 @@ public class PlayerManager : MonoBehaviour
 
     public bool CanGoStairs()
     {
-        return !(move.IsMoving || attack.IsAttacking) || groundCollision.IsFalling;
+        return !(move.IsMoving || attack.IsAttacking || attack.IsDashingAttack) || groundCollision.IsFalling;
     }
 }
