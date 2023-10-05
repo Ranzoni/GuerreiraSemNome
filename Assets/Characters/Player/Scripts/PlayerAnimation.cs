@@ -23,9 +23,9 @@ public class PlayerAnimation : CharacterAnimation
         animator.SetTrigger("dash");
     }
 
-    public void SetMoveOnStair(bool active)
+    public void SetMoveOnStairs(bool active)
     {
-        animator.SetBool("ladder", active);
+        animator.SetBool("moveOnStairs", active);
     }
 
     public void PauseAnimation()

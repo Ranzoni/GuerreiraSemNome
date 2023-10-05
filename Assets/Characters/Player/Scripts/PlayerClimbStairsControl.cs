@@ -54,7 +54,7 @@ public class PlayerClimbStairsControl : MonoBehaviour
         rb2D.gravityScale = gravityScale;
         playerAnimation.ContinueAnimation();
         isOnTheStair = false;
-        playerAnimation.SetMoveOnStair(false);
+        playerAnimation.SetMoveOnStairs(false);
         rb2D.bodyType = RigidbodyType2D.Dynamic;
     }
 
@@ -69,7 +69,7 @@ public class PlayerClimbStairsControl : MonoBehaviour
         if (!isOnTheStair)
         {
             isOnTheStair = true;
-            playerAnimation.SetMoveOnStair(true);
+            playerAnimation.SetMoveOnStairs(true);
             rb2D.gravityScale = 0;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
         }

@@ -42,7 +42,11 @@ public class BanditAI : MonoBehaviour
             else
             {
                 move.Flip(targetCenterPosition);
-                attack.Attack();
+
+                if (health.IsHurting || health.IsDead())
+                    attack.DisableWeaponAttack();
+                else
+                    attack.Attack();
             }
         }
     }
