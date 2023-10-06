@@ -31,7 +31,7 @@ public class PlayerClimbStairsControl : MonoBehaviour
 
         if (stairs is null || Input.GetButtonDown("Jump"))
         {
-            GetOutStair();
+            GetOutStairs();
             return;
         }
 
@@ -43,10 +43,10 @@ public class PlayerClimbStairsControl : MonoBehaviour
             return;
         }
 
-        GoOnStair();
+        GoOnStairs();
     }
 
-    void GetOutStair()
+    void GetOutStairs()
     {
         if (!isOnTheStair)
             return;
@@ -58,11 +58,11 @@ public class PlayerClimbStairsControl : MonoBehaviour
         rb2D.bodyType = RigidbodyType2D.Dynamic;
     }
 
-    void GoOnStair()
+    void GoOnStairs()
     {
         if (!FinishedStairs())
         {
-            GetOutStair();
+            GetOutStairs();
             return;
         }
 
@@ -73,6 +73,8 @@ public class PlayerClimbStairsControl : MonoBehaviour
             rb2D.gravityScale = 0;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
         }
+
+        manager.StopJump();
 
         rb2D.velocity = new Vector2(0, 0);
         playerAnimation.ContinueAnimation();

@@ -62,6 +62,6 @@ public class PlayerManager : MonoBehaviour
 
     public bool CanGoStairs()
     {
-        return !(move.IsMoving || attack.IsAttacking || attack.IsDashingAttack) || groundCollision.IsFalling;
+        return !(move.IsMoving || attack.IsAttacking || attack.IsDashingAttack);
     }
 }
