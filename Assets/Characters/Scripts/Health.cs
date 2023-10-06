@@ -83,4 +83,9 @@ public class Health : MonoBehaviour
         if (CompareTag("Player") && other.gameObject.CompareTag("Checkpoint"))
             Restore();
     }
+
+    public void FallDamage()
+    {
+        TakeDamage(health);
+    }
 }

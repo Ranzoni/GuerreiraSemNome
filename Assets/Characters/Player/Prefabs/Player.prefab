@@ -230,6 +230,7 @@ MonoBehaviour:
   - {fileID: 3342136722216919700}
   - {fileID: 1209553438456805048}
   - {fileID: 6677116049765791201}
+  fallLimit: 6
 --- !u!114 &548148816612606622
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,16 +1,18 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerManager), typeof(PlayerAnimation))]
-public class GroundCollision : MonoBehaviour
+[RequireComponent(typeof(PlayerManager), typeof(PlayerAnimation), typeof(Rigidbody2D))]
+public class PlayerGroundCollision : MonoBehaviour
 {
     [Tooltip("Pontos de colisão do chão")]
     [SerializeField] Transform[] groundChecks;
+    [SerializeField] float fallLimit = 6f;
 
     public bool IsFalling { get { return isFalling; } }
 
     bool isFalling;
     bool isGrounded;
     bool lastStatus;
+    float yStartFall;
     PlayerManager manager;
     PlayerAnimation playerAnimation;
 
@@ -44,6 +46,22 @@ public class GroundCollision : MonoBehaviour
 
     void Fall(bool active)
     {
+        if (active)
+        {
+            yStartFall = transform.position.y;
+        }
+        else
+        {
+            Debug.Log($"yStartFall: {yStartFall}");
+            Debug.Log($"rb2D.velocity.y: {transform.position.y}");
+            var disanceFromStarFall = yStartFall - transform.position.y;
+            if (disanceFromStarFall > fallLimit)
+                SendMessage("FallDamage");
+
+            yStartFall = 0;
+        } 
+
+
         playerAnimation.SetFall(active);
         isFalling = active;
     }

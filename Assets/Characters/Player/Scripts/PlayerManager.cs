@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] PlayerAttack attack;
     [SerializeField] Health health;
     [SerializeField] PlayerClimbStairsControl climbStairsControl;
-    [SerializeField] GroundCollision groundCollision;
+    [SerializeField] PlayerGroundCollision groundCollision;
 
     public bool IsMoving { get { return move.IsMoving; } }
     public bool IsFlipped { get { return move.IsFlipped; } }
