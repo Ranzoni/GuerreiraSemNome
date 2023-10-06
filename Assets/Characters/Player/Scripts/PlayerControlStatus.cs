@@ -1,8 +1,8 @@
 using Cinemachine;
 using UnityEngine;
 
-[RequireComponent(typeof(Health))]
-public class PlayerStatusManager : MonoBehaviour
+[RequireComponent(typeof(Health), typeof(Rigidbody2D))]
+public class PlayerControlStatus : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
 

@@ -17,7 +17,7 @@ public class DeadLine : MonoBehaviour
 
     void InactivePlayer(GameObject player)
     {
-        var playerStatusManager = player.GetComponent<PlayerStatusManager>();
+        var playerStatusManager = player.GetComponent<PlayerControlStatus>();
         if (playerStatusManager is not null)
             playerStatusManager.Inative();
     }

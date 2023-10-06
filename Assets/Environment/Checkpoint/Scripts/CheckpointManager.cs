@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
-    [SerializeField] PlayerStatusManager playerStatusManager;
+    [SerializeField] PlayerControlStatus playerStatusManager;
     [SerializeField] Transform boss;
     [SerializeField] Transform startBossFight;
 

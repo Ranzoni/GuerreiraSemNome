@@ -52,15 +52,12 @@ public class PlayerGroundCollision : MonoBehaviour
         }
         else
         {
-            Debug.Log($"yStartFall: {yStartFall}");
-            Debug.Log($"rb2D.velocity.y: {transform.position.y}");
             var disanceFromStarFall = yStartFall - transform.position.y;
             if (disanceFromStarFall > fallLimit)
                 SendMessage("FallDamage");
 
             yStartFall = 0;
         } 
-
 
         playerAnimation.SetFall(active);
         isFalling = active;
