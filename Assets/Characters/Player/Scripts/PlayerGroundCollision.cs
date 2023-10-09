@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerManager), typeof(PlayerAnimation), typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerManager), typeof(PlayerAnimation))]
 public class PlayerGroundCollision : MonoBehaviour
 {
     [Tooltip("Pontos de colisão do chão")]
@@ -30,10 +30,14 @@ public class PlayerGroundCollision : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isGrounded == lastStatus)
-            return;
-
         if (manager.IsOnStairs)
+        {
+            Debug.Log("IsOnStairs");
+            yStartFall = 0;
+            return;
+        }
+
+        if (isGrounded == lastStatus)
             return;
 
         if (isGrounded && manager.IsJumping)
@@ -44,13 +48,13 @@ public class PlayerGroundCollision : MonoBehaviour
         lastStatus = isGrounded;
     }
 
-    void Fall(bool active)
+    void Fall(bool statusIsFalling)
     {
-        if (active)
+        if (statusIsFalling)
         {
             yStartFall = transform.position.y;
         }
-        else
+        else if (yStartFall != 0)
         {
             var disanceFromStarFall = yStartFall - transform.position.y;
             if (disanceFromStarFall > fallLimit)
@@ -59,8 +63,8 @@ public class PlayerGroundCollision : MonoBehaviour
             yStartFall = 0;
         } 
 
-        playerAnimation.SetFall(active);
-        isFalling = active;
+        playerAnimation.SetFall(statusIsFalling);
+        isFalling = statusIsFalling;
     }
 
     bool CheckGrounded()

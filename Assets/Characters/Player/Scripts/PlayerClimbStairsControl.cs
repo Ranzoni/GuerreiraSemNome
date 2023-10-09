@@ -26,6 +26,18 @@ public class PlayerClimbStairsControl : MonoBehaviour
 
     void Update()
     {
+        if (manager.IsDead)
+        {
+            GetOutStairs();
+            return;
+        }
+
+        if (manager.IsHurting)
+        {
+            playerAnimation.ContinueAnimation();
+            return;
+        }
+
         if (!manager.CanGoStairs())
             return;
 

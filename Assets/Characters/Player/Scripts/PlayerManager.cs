@@ -13,11 +13,8 @@ public class PlayerManager : MonoBehaviour
     public bool IsJumping { get { return move.IsJumping; } }
     public bool IsOnStairs { get { return climbStairsControl.IsTheStairs; } }
     public bool IsDashingAttack { get { return attack.IsDashingAttack; } }
-
-    public void StopRun()
-    {
-        move.StopRun();
-    }
+    public bool IsHurting { get { return health.IsHurting; } }
+    public bool IsDead { get { return health.IsDead(); } }
 
     public void StopJump()
     {

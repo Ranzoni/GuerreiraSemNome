@@ -74,7 +74,6 @@ public class PlayerMove : MonoBehaviour
         public void Stop()
         {
             horizontalMove = 0;
-            rb2D.velocity = new Vector3(0, 0, 0);
         }
     }
 
@@ -203,7 +202,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (manager.HaveToStopMovement())
         {
-            StopRun();
+            componentRun.Stop();
             return;
         }
 
@@ -230,11 +229,6 @@ public class PlayerMove : MonoBehaviour
         }
             
         componentJump.Execute(jumpHeight);
-    }
-
-    public void StopRun()
-    {
-        componentRun.Stop();
     }
 
     public void StopJump()
