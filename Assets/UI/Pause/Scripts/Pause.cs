@@ -9,13 +9,11 @@ public class Pause : MonoBehaviour
     [SerializeField] UnityEvent gamePaused;
     [SerializeField] UnityEvent gameResumed;
 
-    Canvas pauseCanvas;
     FirstButtonController buttonController;
 
     void Start()
     {
-        pauseCanvas = GetComponent<Canvas>();
-        pauseCanvas.enabled = false;
+        SetUIActive(false);
 
         buttonController = FindFirstObjectByType<FirstButtonController>();
     }
@@ -33,12 +31,12 @@ public class Pause : MonoBehaviour
 
     bool IsPaused()
     {
-        return pauseCanvas.enabled;
+        return transform.GetChild(0).gameObject.activeSelf;
     }
 
     public void ResumeGame()
     {
-        pauseCanvas.enabled = false;
+        SetUIActive(false);
         section.UnlockScreen();
         gameResumed.Invoke();
     }
@@ -46,8 +44,14 @@ public class Pause : MonoBehaviour
     void PauseGame()
     {
         buttonController.SelectPauseButton();
-        pauseCanvas.enabled = true;
+        SetUIActive(true);
         section.LockScreen();
         gamePaused.Invoke();
+    }
+
+    void SetUIActive(bool active)
+    {
+        for (var i = 0; i < transform.childCount; i++)
+            transform.GetChild(i).gameObject.SetActive(active);
     }
 }
