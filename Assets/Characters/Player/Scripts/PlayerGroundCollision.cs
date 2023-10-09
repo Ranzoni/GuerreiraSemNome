@@ -32,7 +32,6 @@ public class PlayerGroundCollision : MonoBehaviour
     {
         if (manager.IsOnStairs)
         {
-            Debug.Log("IsOnStairs");
             yStartFall = 0;
             return;
         }
@@ -56,8 +55,8 @@ public class PlayerGroundCollision : MonoBehaviour
         }
         else if (yStartFall != 0)
         {
-            var disanceFromStarFall = yStartFall - transform.position.y;
-            if (disanceFromStarFall > fallLimit)
+            var distanceFromStarFall = yStartFall - transform.position.y;
+            if (distanceFromStarFall > fallLimit)
                 SendMessage("FallDamage");
 
             yStartFall = 0;

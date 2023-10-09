@@ -27,7 +27,10 @@ public class BanditAI : MonoBehaviour
     {
         move.StopMove();
         if (health.IsDead() || health.IsHurting || targetHealth.IsDead())
+        {
+            attack.DisableWeaponAttack();
             return;
+        }
 
         var targetCenterPosition = GetCenterPosition(target.transform);
         var targetDistance = Vector2.Distance(transform.position, targetCenterPosition);
