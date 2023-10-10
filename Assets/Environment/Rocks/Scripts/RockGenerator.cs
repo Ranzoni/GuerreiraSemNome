@@ -9,11 +9,15 @@ public class RockGenerator : MonoBehaviour
     [SerializeField] Transform[] listPositions;
 
     bool started;
+    bool finished;
 
     IEnumerator GenerateRandomPrefabRoutine()
     {
         while (true)
         {
+            if (finished)
+                break;
+
             var indexPosition = Random.Range(0, listPositions.Length);
             var xValue = listPositions[indexPosition].position.x;
             var rockPosition = new Vector2(xValue, transform.position.y);
@@ -44,5 +48,13 @@ public class RockGenerator : MonoBehaviour
 
         started = true;
         StartCoroutine(GenerateRandomPrefabRoutine());
+    }
+
+    public void FinishRockGeneration()
+    {
+        if (!started)
+            return;
+
+        finished = true;
     }
 }
