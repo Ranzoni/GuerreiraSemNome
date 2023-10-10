@@ -32,6 +32,7 @@ public class PlayerGroundCollision : MonoBehaviour
     {
         if (manager.IsOnStairs)
         {
+            isFalling = false;
             yStartFall = 0;
             return;
         }
