@@ -4,9 +4,9 @@ using UnityEngine;
 public class RockGenerator : MonoBehaviour
 {
     [SerializeField] float delayGeneration = .5f;
-    [SerializeField] int maxRange = 10;
     [Tooltip("Prefabs das pedras que serão geradas")]
     [SerializeField] GameObject[] listPrefabRock;
+    [SerializeField] Transform[] listPositions;
 
     bool started;
 
@@ -14,7 +14,8 @@ public class RockGenerator : MonoBehaviour
     {
         while (true)
         {
-            var xValue = Random.Range(transform.position.x, transform.position.x + maxRange);
+            var indexPosition = Random.Range(0, listPositions.Length);
+            var xValue = listPositions[indexPosition].position.x;
             var rockPosition = new Vector2(xValue, transform.position.y);
 
             var prefab = ReturnRandomPrefab();

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8000196146577308975}
-  - component: {fileID: 8000196146577308968}
   - component: {fileID: 8000196146577308974}
   - component: {fileID: 52491489293130357}
+  - component: {fileID: 7087179414853615229}
   - component: {fileID: 3199693307165449308}
   - component: {fileID: -732107822511143336}
   m_Layer: 0
@@ -36,27 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &8000196146577308968
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8000196146577308972}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0.2
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!212 &8000196146577308974
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -146,6 +125,19 @@ PolygonCollider2D:
       - {x: 0.2509065, y: -0.2392189}
       - {x: 0.2342816, y: 0.03675027}
       - {x: 0.17596915, y: 0.1816875}
+--- !u!114 &7087179414853615229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000196146577308972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4efa4bd8685d340a256339e8229161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.07
 --- !u!114 &3199693307165449308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,4 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80fc386a82380542b130dfbfb6282f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayToClear: 8
+  delayToClear: 10
