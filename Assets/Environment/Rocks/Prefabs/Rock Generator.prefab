@@ -26,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894774381931088076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.75, z: 0}
+  m_LocalPosition: {x: 0, y: -1.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8929150360995269021}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &665945770118282593
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baefe97f95cdc6741baadbbe2326201f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockGenerator: {fileID: 3255106129398282272}
+  rockGenerator: {fileID: 4781212345103946854}
 --- !u!61 &2649189206947197883
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -72,6 +72,55 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &4307768989930806818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9189080763950543788}
+  - component: {fileID: 4781212345103946854}
+  m_Layer: 0
+  m_Name: Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9189080763950543788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4307768989930806818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8929150360995269021}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4781212345103946854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4307768989930806818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7052ccc389efed4baff726a0554fb4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayGeneration: 1
+  listPrefabRock:
+  - {fileID: 8000196146577308972, guid: 52987250c3108d044b245e80f26c5723, type: 3}
+  - {fileID: 8000196146577308972, guid: c809a89f74bdf1c45978a05fd481ef1a, type: 3}
+  listPositions: []
 --- !u!1 &4379927981345382425
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,12 +147,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4379927981345382425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.67, z: 0}
+  m_LocalPosition: {x: 0, y: -1.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8929150360995269021}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2879848253897729232
 MonoBehaviour:
@@ -117,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e96a44a9beb2748a7dfad59c4ad9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockGenerator: {fileID: 3255106129398282272}
+  rockGenerator: {fileID: 4781212345103946854}
 --- !u!61 &2830839671789621352
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +202,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8929150360995269021}
-  - component: {fileID: 3255106129398282272}
   m_Layer: 0
   m_Name: Rock Generator
   m_TagString: Untagged
@@ -173,25 +221,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9189080763950543788}
   - {fileID: 5238626076357309738}
   - {fileID: 3775031614987870310}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3255106129398282272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8929150360995269022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7052ccc389efed4baff726a0554fb4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delayGeneration: 1
-  listPrefabRock:
-  - {fileID: 8000196146577308972, guid: 52987250c3108d044b245e80f26c5723, type: 3}
-  - {fileID: 8000196146577308972, guid: c809a89f74bdf1c45978a05fd481ef1a, type: 3}
-  listPositions: []
