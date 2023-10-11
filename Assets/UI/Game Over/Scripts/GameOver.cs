@@ -11,11 +11,13 @@ public class GameOver : MonoBehaviour
     [SerializeField] ControlSection section;
     [SerializeField] UnityEvent gameFinished;
     [SerializeField] UnityEvent gameResumed;
-    [SerializeField] GameObject prefabButtonUISFX;
+    [SerializeField] GameObject prefabButtonUINavSFX;
+    [SerializeField] GameObject prefabButtonUIClickSFX;
 
     FirstButtonController buttonController;
     CheckpointManager checkpointManager;
-    AudioSource buttonUISFX;
+    AudioSource buttonUINavSFX;
+    AudioSource buttonUIClickSFX;
 
     void Start()
     {
@@ -23,7 +25,8 @@ public class GameOver : MonoBehaviour
 
         buttonController = FindFirstObjectByType<FirstButtonController>();
         checkpointManager = FindFirstObjectByType<CheckpointManager>();
-        buttonUISFX = Instantiate(prefabButtonUISFX, transform.position, Quaternion.identity).GetComponent<AudioSource>();
+        buttonUINavSFX = AudioSourceInstantiate(prefabButtonUINavSFX);
+        buttonUIClickSFX = AudioSourceInstantiate(prefabButtonUIClickSFX);
     }    
 
     public void ExecuteGameOver()
@@ -45,14 +48,19 @@ public class GameOver : MonoBehaviour
     public void ResumeGame()
     {
         if (checkpointManager is not null && checkpointManager.HasCheckpoint)
-        {
-            checkpointManager.RestoreToCheckpoint();
-            SetUIActive(false);
-            gameResumed.Invoke();
-            section.UnlockScreen();
-        }
+            StartCoroutine(ResumeGameRoutine());
         else
             section.StartGame();
+    }
+
+    IEnumerator ResumeGameRoutine()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+
+        checkpointManager.RestoreToCheckpoint();
+        SetUIActive(false);
+        gameResumed.Invoke();
+        section.UnlockScreen();
     }
 
     void SetUIActive(bool active)
@@ -61,8 +69,18 @@ public class GameOver : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(active);
     }
 
-    public void PlayButtonUISFX()
+    AudioSource AudioSourceInstantiate(GameObject prefab)
     {
-        buttonUISFX.Play();
+        return Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<AudioSource>();
+    }
+
+    public void PlayButtonUINavSFX()
+    {
+        buttonUINavSFX.Play();
+    }
+
+    public void PlayButtonUIClickSFX()
+    {
+        buttonUIClickSFX.Play();
     }
 }

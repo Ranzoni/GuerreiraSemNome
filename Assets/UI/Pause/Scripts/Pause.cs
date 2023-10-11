@@ -8,17 +8,20 @@ public class Pause : MonoBehaviour
     [SerializeField] ControlSection section;
     [SerializeField] UnityEvent gamePaused;
     [SerializeField] UnityEvent gameResumed;
-    [SerializeField] GameObject prefabButtonUISFX;
+    [SerializeField] GameObject prefabButtonUINavSFX;
+    [SerializeField] GameObject prefabButtonUIClickSFX;
 
     FirstButtonController buttonController;
-    AudioSource buttonUISFX;
+    AudioSource buttonUINavSFX;
+    AudioSource buttonUIClickSFX;
 
     void Start()
     {
         SetUIActive(false);
 
         buttonController = FindFirstObjectByType<FirstButtonController>();
-        buttonUISFX = Instantiate(prefabButtonUISFX, transform.position, Quaternion.identity).GetComponent<AudioSource>();
+        buttonUINavSFX = AudioSourceInstantiate(prefabButtonUINavSFX);
+        buttonUIClickSFX = AudioSourceInstantiate(prefabButtonUIClickSFX);
     }
 
     void Update()
@@ -58,8 +61,18 @@ public class Pause : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(active);
     }
 
-    public void PlayButtonUISFX()
+    AudioSource AudioSourceInstantiate(GameObject prefab)
     {
-        buttonUISFX.Play();
+        return Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<AudioSource>();
+    }
+
+    public void PlayButtonUINavSFX()
+    {
+        buttonUINavSFX.Play();
+    }
+
+    public void PlayButtonUIClickSFX()
+    {
+        buttonUIClickSFX.Play();
     }
 }

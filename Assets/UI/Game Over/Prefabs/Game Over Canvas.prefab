@@ -478,6 +478,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2268732601280291332}
+        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+        m_MethodName: PlayButtonUIClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8837033865178187815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +509,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2268732601280291332}
           m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-          m_MethodName: PlayButtonUISFX
+          m_MethodName: PlayButtonUINavSFX
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -632,7 +644,8 @@ MonoBehaviour:
   gameResumed:
     m_PersistentCalls:
       m_Calls: []
-  prefabButtonUISFX: {fileID: 5128187455274512119, guid: ec212e8e66a07f74a971ac39c5315309, type: 3}
+  prefabButtonUINavSFX: {fileID: 5128187455274512119, guid: ec212e8e66a07f74a971ac39c5315309, type: 3}
+  prefabButtonUIClickSFX: {fileID: 5128187455274512119, guid: 5e8e72f20e3d7914bb36e8251a67e0f1, type: 3}
 --- !u!1 &6523707065344622509
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,19 +903,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4821089944745542030}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ControlSection, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &5918863123655391082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,7 +923,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2268732601280291332}
           m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-          m_MethodName: PlayButtonUISFX
+          m_MethodName: PlayButtonUINavSFX
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

@@ -2,17 +2,30 @@ using UnityEngine;
 
 public class VictoryMenu : MonoBehaviour
 {
-    [SerializeField] GameObject prefabButtonUISFX;
+    [SerializeField] GameObject prefabButtonUINavSFX;
+    [SerializeField] GameObject prefabButtonUIClickSFX;
 
-    AudioSource buttonUISFX;
+    AudioSource buttonUINavSFX;
+    AudioSource buttonUIClickSFX;
 
     void Start()
     {
-        buttonUISFX = Instantiate(prefabButtonUISFX, transform.position, Quaternion.identity).GetComponent<AudioSource>();
+        buttonUINavSFX = AudioSourceInstantiate(prefabButtonUINavSFX);
+        buttonUIClickSFX = AudioSourceInstantiate(prefabButtonUIClickSFX);
     }
 
-    public void PlayButtonUISFX()
+    AudioSource AudioSourceInstantiate(GameObject prefab)
     {
-        buttonUISFX.Play();
+        return Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<AudioSource>();
+    }
+
+    public void PlayButtonUINavSFX()
+    {
+        buttonUINavSFX.Play();
+    }
+
+    public void PlayButtonUIClickSFX()
+    {
+        buttonUIClickSFX.Play();
     }
 }

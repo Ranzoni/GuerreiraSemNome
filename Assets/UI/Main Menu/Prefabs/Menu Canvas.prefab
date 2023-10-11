@@ -466,9 +466,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ControlSection, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 8591683896976759518}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: PlayButtonUIClickSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -497,7 +497,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8591683896976759518}
           m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-          m_MethodName: PlayButtonUISFX
+          m_MethodName: PlayButtonUINavSFX
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -624,7 +624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6376a27f87badf542bffe7c77ad272cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabButtonUISFX: {fileID: 5128187455274512119, guid: ec212e8e66a07f74a971ac39c5315309, type: 3}
+  prefabButtonUINavSFX: {fileID: 5128187455274512119, guid: ec212e8e66a07f74a971ac39c5315309, type: 3}
+  prefabButtonUIClickSFX: {fileID: 5128187455274512119, guid: 5e8e72f20e3d7914bb36e8251a67e0f1, type: 3}
 --- !u!1 &6377141704482217620
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +915,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8591683896976759518}
           m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-          m_MethodName: PlayButtonUISFX
+          m_MethodName: PlayButtonUINavSFX
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

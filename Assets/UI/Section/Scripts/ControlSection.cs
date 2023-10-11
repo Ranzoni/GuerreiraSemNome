@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,13 @@ public class ControlSection : MonoBehaviour
 {
     public void StartGame()
     {
+        StartCoroutine(StartGameRoutine());
+    }
+
+    public IEnumerator StartGameRoutine()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+
         UnlockScreen();
         SceneManager.LoadScene(1);
     }
