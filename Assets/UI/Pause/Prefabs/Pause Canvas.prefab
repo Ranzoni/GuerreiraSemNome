@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8569247169132688130}
   - component: {fileID: 1644360198172280525}
   - component: {fileID: 7499367794473997625}
+  - component: {fileID: 8530756044149703125}
   m_Layer: 5
   m_Name: Botao Reiniciar TMP
   m_TagString: Untagged
@@ -176,6 +177,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8530756044149703125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3574808288258009105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac1311f4a85da64ab0c9cf470867539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4613062420746939445
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +680,7 @@ GameObject:
   - component: {fileID: 5994450207214862988}
   - component: {fileID: 5994450207214862987}
   - component: {fileID: 2548442219041068661}
+  - component: {fileID: 5078071445924082932}
   m_Layer: 5
   m_Name: Botao Continuar TMP
   m_TagString: Untagged
@@ -818,6 +832,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5078071445924082932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994450207214862985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac1311f4a85da64ab0c9cf470867539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5994450207929740248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1216,7 @@ GameObject:
   - component: {fileID: 4821089944745542030}
   - component: {fileID: 4708031627409507267}
   - component: {fileID: 5678104388096192573}
+  - component: {fileID: 5921703542478881087}
   m_Layer: 5
   m_Name: Botao Sair TMP
   m_TagString: Untagged
@@ -1341,3 +1368,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5921703542478881087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443961153349853500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac1311f4a85da64ab0c9cf470867539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

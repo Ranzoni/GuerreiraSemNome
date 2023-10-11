@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 5994450207214862988}
   - component: {fileID: 5994450207214862987}
   - component: {fileID: 8837033865178187815}
+  - component: {fileID: 2154284324038151826}
   m_Layer: 5
   m_Name: Botao Tentar Novamente TMP
   m_TagString: Untagged
@@ -519,6 +520,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2154284324038151826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994450207214862985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac1311f4a85da64ab0c9cf470867539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5994450207929740248
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +905,7 @@ GameObject:
   - component: {fileID: 4821089944745542030}
   - component: {fileID: 4708031627409507267}
   - component: {fileID: 5918863123655391082}
+  - component: {fileID: 1846311118959686409}
   m_Layer: 5
   m_Name: Botao Sair TMP
   m_TagString: Untagged
@@ -1031,3 +1045,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1846311118959686409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443961153349853500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac1311f4a85da64ab0c9cf470867539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
