@@ -10,6 +10,12 @@ public class RockGenerator : MonoBehaviour
 
     bool started;
     bool finished;
+    AudioSource sfx;
+
+    void Start()
+    {
+        sfx = GetComponent<AudioSource>();
+    }
 
     IEnumerator GenerateRandomPrefabRoutine()
     {
@@ -46,6 +52,7 @@ public class RockGenerator : MonoBehaviour
         if (started)
             return;
 
+        sfx.Play();
         started = true;
         StartCoroutine(GenerateRandomPrefabRoutine());
     }
