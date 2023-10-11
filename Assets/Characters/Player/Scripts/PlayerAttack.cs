@@ -99,6 +99,7 @@ public class PlayerAttack : MonoBehaviour
 
         yield return new WaitForSeconds(attackDelay);
 
+        DisableWeaponAttack();
         isDashingAttack = false;
         isAttacking = false;
     }
