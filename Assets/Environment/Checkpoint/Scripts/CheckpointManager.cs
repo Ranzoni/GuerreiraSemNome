@@ -28,6 +28,8 @@ public class CheckpointManager : MonoBehaviour
         var positionToRespawn = (Vector2)positionSaved;
         playerStatusManager.ResetStatus(positionToRespawn);
         boss.gameObject.SetActive(false);
+        var bossHealth = boss.GetComponent<Health>();
+        bossHealth.Restore();
         startBossFight.gameObject.SetActive(false);
     }
 }

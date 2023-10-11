@@ -13,7 +13,7 @@ public class WeaponAttack : MonoBehaviour
 
     void Update()
     {
-        if (health is not null && health.IsDead())
+        if (health is not null && health.IsDead() && !health.transform.tag.Equals("Player"))
             Destroy(gameObject);
     }
 

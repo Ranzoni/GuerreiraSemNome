@@ -75,7 +75,8 @@ public class Health : MonoBehaviour
 
     public void Restore()
     {
-        health = maxHealth;
+        if (maxHealth > 0)
+            health = maxHealth;
     }
 
     void OnTriggerEnter2D(Collider2D other)
