@@ -15,6 +15,7 @@ public class Pause : MonoBehaviour
     FirstButtonController buttonController;
     AudioSource buttonUINavSFX;
     AudioSource buttonUIClickSFX;
+    AudioSource sfx;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class Pause : MonoBehaviour
         buttonController = FindFirstObjectByType<FirstButtonController>();
         buttonUINavSFX = AudioSourceInstantiate(prefabButtonUINavSFX);
         buttonUIClickSFX = AudioSourceInstantiate(prefabButtonUIClickSFX);
+        sfx = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -43,6 +45,7 @@ public class Pause : MonoBehaviour
 
     public void ResumeGame()
     {
+        sfx.Play();
         SetUIActive(false);
         section.UnlockScreen();
         gameResumed.Invoke();
@@ -63,6 +66,7 @@ public class Pause : MonoBehaviour
 
     void PauseGame()
     {
+        sfx.Play();
         buttonController.SelectPauseButton();
         SetUIActive(true);
         section.LockScreen();
