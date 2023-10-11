@@ -14,11 +14,13 @@ public class GameOver : MonoBehaviour
     [SerializeField] UnityEvent gameResumed;
     [SerializeField] GameObject prefabButtonUINavSFX;
     [SerializeField] GameObject prefabButtonUIClickSFX;
+    [SerializeField] AudioSource principalMusic;
 
     FirstButtonController buttonController;
     CheckpointManager checkpointManager;
     AudioSource buttonUINavSFX;
     AudioSource buttonUIClickSFX;
+    AudioSource gameOverSFX;
 
     void Start()
     {
@@ -28,6 +30,7 @@ public class GameOver : MonoBehaviour
         checkpointManager = FindFirstObjectByType<CheckpointManager>();
         buttonUINavSFX = AudioSourceInstantiate(prefabButtonUINavSFX);
         buttonUIClickSFX = AudioSourceInstantiate(prefabButtonUIClickSFX);
+        gameOverSFX = GetComponent<AudioSource>();
     }    
 
     public void ExecuteGameOver()
@@ -41,6 +44,8 @@ public class GameOver : MonoBehaviour
 
         yield return new WaitForSeconds(gameOverDelay);
 
+        principalMusic.Stop();
+        gameOverSFX.Play();
         buttonController.SelectGameOverButton();
         SetUIActive(true);
         SetMenuButtonsActive(true);
@@ -73,6 +78,8 @@ public class GameOver : MonoBehaviour
         SetUIActive(false);
         gameResumed.Invoke();
         section.UnlockScreen();
+        gameOverSFX.Stop();
+        principalMusic.Play();
     }
 
     void SetUIActive(bool active)
