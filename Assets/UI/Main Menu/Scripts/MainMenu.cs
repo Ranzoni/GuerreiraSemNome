@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject prefabButtonUINavSFX;
     [SerializeField] GameObject prefabButtonUIClickSFX;
+    [SerializeField] ControlSection section;
 
     AudioSource buttonUINavSFX;
     AudioSource buttonUIClickSFX;
@@ -12,6 +14,15 @@ public class MainMenu : MonoBehaviour
     {
         buttonUINavSFX = AudioSourceInstantiate(prefabButtonUINavSFX);
         buttonUIClickSFX = AudioSourceInstantiate(prefabButtonUIClickSFX);
+    }
+
+    public void StartGame()
+    {
+        var buttons = GetComponentsInChildren<Button>();
+        foreach (var button in buttons)
+            button.enabled = false;
+            
+        section.StartGame();
     }
 
     AudioSource AudioSourceInstantiate(GameObject prefab)

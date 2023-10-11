@@ -9,7 +9,7 @@ public class ControlSection : MonoBehaviour
         StartCoroutine(StartGameRoutine());
     }
 
-    public IEnumerator StartGameRoutine()
+    IEnumerator StartGameRoutine()
     {
         yield return new WaitForSecondsRealtime(1f);
 

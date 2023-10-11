@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Canvas))]
 public class GameOver : MonoBehaviour
@@ -42,15 +43,26 @@ public class GameOver : MonoBehaviour
 
         buttonController.SelectGameOverButton();
         SetUIActive(true);
+        SetMenuButtonsActive(true);
         section.LockScreen();
     }
 
     public void ResumeGame()
     {
+        SetMenuButtonsActive(false);
+
         if (checkpointManager is not null && checkpointManager.HasCheckpoint)
             StartCoroutine(ResumeGameRoutine());
         else
             section.StartGame();
+    }
+
+    void SetMenuButtonsActive(bool active)
+    {
+        var buttons = GetComponentsInChildren<Button>();
+        Debug.Log(buttons.Length);
+        foreach (var button in buttons)
+            button.enabled = active;
     }
 
     IEnumerator ResumeGameRoutine()

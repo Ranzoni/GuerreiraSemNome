@@ -407,34 +407,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 152
       objectReference: {fileID: 0}
-    - target: {fileID: 5994450207214862987, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5994450207214862987, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5994450207214862987, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 474334062}
-    - target: {fileID: 5994450207214862987, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5994450207214862987, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: StartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 5994450207214862987, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ControlSection, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5994450207214862987, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5994450207929740248, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
       propertyPath: m_Name
       value: Menu Canvas
@@ -531,6 +503,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CloseGame
       objectReference: {fileID: 0}
+    - target: {fileID: 8591683896976759518, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
+      propertyPath: section
+      value: 
+      objectReference: {fileID: 474334062}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88c4ae5a529ae4649af6c3ed8609af2c, type: 3}
 --- !u!1 &5994450207307491601 stripped

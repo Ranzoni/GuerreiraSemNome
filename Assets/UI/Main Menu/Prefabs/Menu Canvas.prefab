@@ -108,7 +108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: 187}
+  m_AnchoredPosition: {x: -132, y: 146}
   m_SizeDelta: {x: 341.7839, y: 246.31592}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5994450206879516804
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 12.464539, z: 0, w: 0}
+  m_margin: {x: -84.49713, y: 12.464539, z: -353.01062, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -478,6 +478,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8591683896976759518}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1835943259994032136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabButtonUINavSFX: {fileID: 5128187455274512119, guid: ec212e8e66a07f74a971ac39c5315309, type: 3}
   prefabButtonUIClickSFX: {fileID: 5128187455274512119, guid: 5e8e72f20e3d7914bb36e8251a67e0f1, type: 3}
+  section: {fileID: 0}
 --- !u!1 &6377141704482217620
 GameObject:
   m_ObjectHideFlags: 0

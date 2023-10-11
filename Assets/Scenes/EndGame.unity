@@ -408,6 +408,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 382184001}
     m_Modifications:
+    - target: {fileID: 586339365812762732, guid: 9db7a9ca8436a1045bd83d4d03e09302, type: 3}
+      propertyPath: section
+      value: 
+      objectReference: {fileID: 474334062}
     - target: {fileID: 6847780239188903686, guid: 9db7a9ca8436a1045bd83d4d03e09302, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -500,9 +504,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Victory Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 9078327662435343165, guid: 9db7a9ca8436a1045bd83d4d03e09302, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 474334062}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9db7a9ca8436a1045bd83d4d03e09302, type: 3}

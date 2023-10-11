@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Canvas))]
 public class Pause : MonoBehaviour
@@ -45,6 +46,19 @@ public class Pause : MonoBehaviour
         SetUIActive(false);
         section.UnlockScreen();
         gameResumed.Invoke();
+    }
+
+    public void RestartGame()
+    {
+        DisableMenu();
+        section.StartGame();
+    }
+
+    void DisableMenu()
+    {
+        var buttons = GetComponentsInChildren<Button>();
+        foreach (var button in buttons)
+            button.enabled = false;
     }
 
     void PauseGame()

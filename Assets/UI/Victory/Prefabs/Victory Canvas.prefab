@@ -418,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabButtonUINavSFX: {fileID: 5128187455274512119, guid: ec212e8e66a07f74a971ac39c5315309, type: 3}
   prefabButtonUIClickSFX: {fileID: 5128187455274512119, guid: 5e8e72f20e3d7914bb36e8251a67e0f1, type: 3}
+  section: {fileID: 0}
 --- !u!1 &9078327662244397959
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,6 +888,18 @@ MonoBehaviour:
       - m_Target: {fileID: 586339365812762732}
         m_TargetAssemblyTypeName: VictoryMenu, Assembly-CSharp
         m_MethodName: PlayButtonUIClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 586339365812762732}
+        m_TargetAssemblyTypeName: VictoryMenu, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
