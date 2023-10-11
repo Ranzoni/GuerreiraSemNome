@@ -11,9 +11,11 @@ public class GameOver : MonoBehaviour
     [SerializeField] ControlSection section;
     [SerializeField] UnityEvent gameFinished;
     [SerializeField] UnityEvent gameResumed;
+    [SerializeField] GameObject prefabButtonUISFX;
 
     FirstButtonController buttonController;
     CheckpointManager checkpointManager;
+    AudioSource buttonUISFX;
 
     void Start()
     {
@@ -21,6 +23,7 @@ public class GameOver : MonoBehaviour
 
         buttonController = FindFirstObjectByType<FirstButtonController>();
         checkpointManager = FindFirstObjectByType<CheckpointManager>();
+        buttonUISFX = Instantiate(prefabButtonUISFX, transform.position, Quaternion.identity).GetComponent<AudioSource>();
     }    
 
     public void ExecuteGameOver()
@@ -56,5 +59,10 @@ public class GameOver : MonoBehaviour
     {
         for (var i = 0; i < transform.childCount; i++)
             transform.GetChild(i).gameObject.SetActive(active);
+    }
+
+    public void PlayButtonUISFX()
+    {
+        buttonUISFX.Play();
     }
 }

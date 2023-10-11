@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8002804282806926536}
   - component: {fileID: 8569247169132688130}
   - component: {fileID: 1644360198172280525}
+  - component: {fileID: 7499367794473997625}
   m_Layer: 5
   m_Name: Botao Reiniciar TMP
   m_TagString: Untagged
@@ -134,6 +135,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7499367794473997625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3574808288258009105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4589214521380231240}
+          m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+          m_MethodName: PlayButtonUISFX
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4613062420746939445
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +654,7 @@ GameObject:
   - component: {fileID: 5994450207214862989}
   - component: {fileID: 5994450207214862988}
   - component: {fileID: 5994450207214862987}
+  - component: {fileID: 2548442219041068661}
   m_Layer: 5
   m_Name: Botao Continuar TMP
   m_TagString: Untagged
@@ -746,6 +777,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2548442219041068661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994450207214862985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4589214521380231240}
+          m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+          m_MethodName: PlayButtonUISFX
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5994450207929740248
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +931,7 @@ MonoBehaviour:
   gameResumed:
     m_PersistentCalls:
       m_Calls: []
+  prefabButtonUISFX: {fileID: 5128187455274512119, guid: ec212e8e66a07f74a971ac39c5315309, type: 3}
 --- !u!1 &6523707065344622509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,6 +1079,7 @@ GameObject:
   - component: {fileID: 4674296555518822037}
   - component: {fileID: 4821089944745542030}
   - component: {fileID: 4708031627409507267}
+  - component: {fileID: 5678104388096192573}
   m_Layer: 5
   m_Name: Botao Sair TMP
   m_TagString: Untagged
@@ -1140,3 +1202,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5678104388096192573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443961153349853500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4589214521380231240}
+          m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+          m_MethodName: PlayButtonUISFX
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
