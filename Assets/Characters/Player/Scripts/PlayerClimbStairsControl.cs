@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerManager), typeof(PlayerAnimation))]
 public class PlayerClimbStairsControl : MonoBehaviour
 {
     [SerializeField] float speed = 2f;
+    [SerializeField] TilemapCollider2D groundCollider;
 
     public bool IsTheStairs { get { return isOnTheStair; } }
 
@@ -11,8 +13,6 @@ public class PlayerClimbStairsControl : MonoBehaviour
     bool isOnTheStair;
     Rigidbody2D rb2D;
     float gravityScale;
-    bool startStair;
-    bool endStair;
     PlayerManager manager;
     PlayerAnimation playerAnimation;
 
@@ -43,6 +43,9 @@ public class PlayerClimbStairsControl : MonoBehaviour
 
         if (stairs is null || Input.GetButtonDown("Jump"))
         {
+            if (stairs is null)
+                ActiveGround(true);
+
             GetOutStairs();
             return;
         }
@@ -72,18 +75,13 @@ public class PlayerClimbStairsControl : MonoBehaviour
 
     void GoOnStairs()
     {
-        if (!FinishedStairs())
-        {
-            GetOutStairs();
-            return;
-        }
-
         if (!isOnTheStair)
         {
             isOnTheStair = true;
             playerAnimation.SetMoveOnStairs(true);
             rb2D.gravityScale = 0;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
+            ActiveGround(false);
         }
 
         manager.StopJump();
@@ -94,24 +92,15 @@ public class PlayerClimbStairsControl : MonoBehaviour
         transform.Translate(position * speed * Time.deltaTime);
     }
 
-    bool FinishedStairs()
+    void ActiveGround(bool active)
     {
-        if (Input.GetAxisRaw("Vertical") > 0 && endStair)
-            return false;
-
-        if (Input.GetAxisRaw("Vertical") < 0 && startStair)
-            return false;
-
-        return true;
+        groundCollider.enabled = active;
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Stairs") && stairs is null)
             stairs = other.gameObject;
-
-        startStair = other.gameObject.CompareTag("StartStair");
-        endStair = other.gameObject.CompareTag("EndStair");
     }
 
     void OnTriggerExit2D(Collider2D other)
